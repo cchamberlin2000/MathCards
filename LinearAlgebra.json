@@ -1,0 +1,570 @@
+{
+    "id": 101,
+    "name": "Linear Algebra",
+    "cards": [
+        { 
+            "id": 1, 
+            "question": "What is a vector?", 
+            "answer": "A list of `n` numbers (or a point or an arrow) in `RR^n`.", 
+            "checked": false 
+        },
+        { 
+            "id": 2, 
+            "question": "How do we add scaled vectors?", 
+            "answer": "Algebraically (entry-wise) & geometrically (parallelogram/triangle law).", 
+            "checked": false 
+        },
+        { 
+            "id": 3, 
+            "question": "What is a linear combination of a set of <i class='math-font'>k</i> vectors, {<b class='math-font'>v</b>₁, <b class='math-font'>v</b>₂, ... , <b class='math-font'>v</b>ₖ}?", 
+            "answer": "Another vector, `x_1 bb(v)_1 + x_2 bb(v)_2 + ... + x_k bb(v)_k`, where the scalars `x_i` are real numbers.", 
+            "checked": false 
+        },
+        { 
+            "id": 4, 
+            "question": "What is a span of a set of vectors?", 
+            "answer": "The set of all possible linear combinations of those vectors.", 
+            "checked": false 
+        },
+        { 
+            "id": 5, 
+            "question": "What is a vector equation equivalent to?", 
+            "answer": "Its related linear system of equations.", 
+            "checked": false 
+        },
+        { 
+            "id": 6, 
+            "question": "How do you check if a linear system is consistent using spans?", 
+            "answer": "Check if the column vector on the end of its augmented matrix is in the span of the other column vectors.", 
+            "checked": false 
+        },
+        { 
+            "id": 7, 
+            "question": "What geometric shapes do single and double vectors span?", 
+            "answer": "A single nonzero vector spans a line. Two nonzero vectors that aren't scalar multiples span a plane.", 
+            "checked": false 
+        },
+        { 
+            "id": 8, 
+            "question": "What constitutes a solution to a system of linear equations in <i class='math-font'>n</i> variables?", 
+            "answer": "A vector (or point) in `RR^n` with entries that satisfy each equation.", 
+            "checked": false 
+        },
+        { 
+            "id": 9, 
+            "question": "What is an inconsistent system?", 
+            "answer": "A system of equations with no solutions.", 
+            "checked": false 
+        },
+        { 
+            "id": 10, 
+            "question": "A matrix is in <b>Row Echelon Form</b> (REF) if it satisfies the following criteria: <br><br> 1. All zero rows are __________________. <br><br> 2. The first nonzero entry of a row (called a __________________ ) is __________________ <br><br> 3. Below the pivots __________________.", 
+            "answer": "1. ... at the bottom of the matrix. <br><br> 2. ... <b>pivot</b> ... to the right of the first nonzero entry of the row above. <br><br> 3. ... all entries are zero.", 
+            "checked": false 
+        },
+        { 
+            "id": 11, 
+            "question": "What is the primary benefit of reducing an augmented matrix to Row Echelon Form (REF)?", 
+            "answer": "It corresponds to a system of linear equations that can be easily solved by back substitution.", 
+            "checked": false 
+        },
+        { 
+            "id": 12, 
+            "question": "What is the primary benefit of Reduced Row Echelon Form (RREF)?", 
+            "answer": "It corresponds to a system of linear equations that can be easily solved just by looking.", 
+            "checked": false 
+        },
+        { 
+            "id": 13, 
+            "question": "In Gaussian Elimination, what are the three allowable row operations that, when applied to an augmented matrix, yield another augmented matrix corresponding to a system with the same solution set?", 
+            "answer": "1. Row swaps <br><br> 2. Row scales (multiply a row by a scalar) <br><br> 3. Row replacements (new row is a sum of multiples of two rows)", 
+            "checked": false 
+        },
+        { 
+            "id": 14, 
+            "question": "How can you tell a system is inconsistent strictly from its REF?", 
+            "answer": "The REF of its augmented matrix has a pivot in the last column.", 
+            "checked": false 
+        },
+        { 
+            "id": 15, 
+            "question": "If every column except the last in an augmented matrix is a pivot column, what does this mean?", 
+            "answer": "The system has a unique solution.", 
+            "checked": false 
+        },
+        { 
+            "id": 16, 
+            "question": "What do columns without pivots correspond to in a coefficient matrix?", 
+            "answer": "Free variables.", 
+            "checked": false 
+        },
+        { 
+            "id": 17,
+            "question": "If the equation <i class='math-font'>A</i><b class='math-font'>x</b> = <b class='math-font'>b</b> has a solution, what must be true about vector <b class='math-font'>b</b>?", 
+            "answer": "`bb(b)` is in the span of columns of `A`.", 
+            "checked": false 
+        },
+        { 
+            "id": 18, 
+            "question": "To obtain the <i class='math-font'>i</i>&thinsp;th entry in <i class='math-font'>A</i><b class='math-font'>v</b> using the <b>Dot Product Way</b>, _____________________ ", 
+            "answer": "... take the dot product of the `i`th row of `A` with the vector `bb(v)`.", 
+            "checked": false 
+        },
+        { 
+            "id": 19, 
+            "question": "To apply the <b>Column Way</b> of multiplying <i class='math-font'>A</i><b class='math-font'>v</b>, _____________________ ", 
+            "answer": "... multiply the columns of `A` times the corresponding entries of `bb(v)` and sum.", 
+            "checked": false 
+        },
+        { 
+            "id": 20, 
+            "question": "A linear combination of a set of vectors is really _____________________ ", 
+            "answer": "... a matrix-vector multiplication in disguise.", 
+            "checked": false 
+        },
+        { 
+            "id": 21, 
+            "question": "According to the Spanning Theorem for an <i class='math-font'>m</i> &times; <i class='math-font'>n</i> matrix <i class='math-font'>A</i>, what three statements are equivalent?", 
+            "answer": "1. `A bb(x) = bb(b)` has a solution for all `bb(b)`. <br><br> 2. The span of the columns of `A` is `RR^m`. <br><br> 3. `A` has a pivot in each row.", 
+            "checked": false 
+        },
+        { 
+            "id": 22, 
+            "question": "What are four equivalent ways to say that vector <b class='math-font'>b</b> is in the span of a set of vectors?", 
+            "answer": "1. `bb(b)` is in `text(Span){bb(v)_1, bb(v)_2, ..., bb(v)_k}` <br><br> 2. `bb(b)` is a linear combination of `bb(v)_1, bb(v)_2, ..., bb(v)_k` . <br><br> 3. The vector equation `x_1 bb(v)_1 + x_2 bb(v)_2 + ... + x_k bb(v)_k = bb(b)` has at least one solution. <br><br> 4. The system corresponding to `A bb(x) = bb(b)` is consistent.", 
+            "checked": false 
+        },
+        { 
+            "id": 23, 
+            "question": "If <i class='math-font'>A</i><b class='math-font'>x</b> = <b class='math-font'>b</b> is consistent and <b class='math-font'>x</b> = <b class='math-font'>p</b> is a particular solution, what form do all solutions take?", 
+            "answer": "`bb(x) = bb(p) + bb(x)_h` <br><br> where `bb(x)_h` is a solution to the homogeneous equation `A bb(x) = bb(0)`.", 
+            "checked": false 
+        },
+        { 
+            "id": 24, 
+            "question": "What defines a linearly independent set of vectors?", 
+            "answer": "The vector equation `x_1 bb(v)_1 + x_2 bb(v)_2 + ... + x_k bb(v)_k = bb(0)` has only the trivial solution.", 
+            "checked": false 
+        },
+        { 
+            "id": 25, 
+            "question": "How do you test a set of vectors for linear independence using a matrix?", 
+            "answer": "Make them columns of a matrix `A`, and transform to RREF. If there are any free columns, the vectors are dependent.", 
+            "checked": false 
+        },
+        { 
+            "id": 26, 
+            "question": "What does the number of pivot columns in a matrix tell you about its span?", 
+            "answer": "The number of pivot columns is the dimension of the span of the columns.", 
+            "checked": false 
+        },
+        { 
+            "id": 27, 
+            "question": "What three conditions must a subset <i class='math-font'>V</i> of a vector space satisfy to be a subspace?", 
+            "answer": "1. It must contain the zero vector, `bb(0)`. <br><br> 2. It must be closed under vector addition. <br><br> 3. It must be closed under scalar multiplication.", 
+            "checked": false 
+        },
+        { 
+            "id": 28, 
+            "question": "How do you find a spanning set for the Null Space, Nul(<i class='math-font'>A</i>)?", 
+            "answer": "Solve `A bb(x) = bb(0)` in vector parametric form.", 
+            "checked": false 
+        },
+        { 
+            "id": 29, 
+            "question": "How do you find a spanning set for the Column Space, Col(<i class='math-font'>A</i>)?", 
+            "answer": "Take the pivot columns of `A` (not the reduced `A`).", 
+            "checked": false 
+        },
+        { 
+            "id": 30, 
+            "question": "What are three common examples of subspaces?", 
+            "answer": "1. Span <br><br> 2. Column space <br><br> 3. Null space", 
+            "checked": false 
+        },
+        { 
+            "id": 31, 
+            "question": "What defines a basis for a subspace <i class='math-font'>V</i> of &#8477;<sup><i class='math-font'>n</i></sup>?", 
+            "answer": "A linearly independent set of vectors that spans `V`. The number of vectors in the basis is the dimension of `V`.", 
+            "checked": false 
+        },
+        { 
+            "id": 32, 
+            "question": "According to the Basis Theorem, if <i class='math-font'>V</i> is a <i class='math-font'>k</i>-dimensional subspace, a subset ℬ of vectors is a basis if it has two of what three properties?", 
+            "answer": "1. ℬ spans `V` <br><br> 2. ℬ is linearly independent <br><br> 3. ℬ contains `k` vectors", 
+            "checked": false 
+        },
+        { 
+            "id": 33, 
+            "question": "If ℬ is a basis for a subspace <i class='math-font'>V</i>, how many ways can a vector <b class='math-font'>x</b> in <i class='math-font'>V</i> be written as a linear combination of the basis vectors?", 
+            "answer": "In exactly one way.", 
+            "checked": false 
+        },
+        { 
+            "id": 34, 
+            "question": "How do you transform a vector from a non-standard basis ℬ into the standard basis <i class='math-font'>S</i>?", 
+            "answer": "Multiply the matrix formed by the ℬ-basis vectors times the given ℬ-vector.", 
+            "checked": false 
+        },
+        { 
+            "id": 35, 
+            "question": "How do you transform a vector from the standard basis <i class='math-font'>S</i> into a non-standard basis ℬ?", 
+            "answer": "Multiply the inverse of the matrix formed by the ℬ-basis vectors times the given `S`-vector.", 
+            "checked": false 
+        },
+        { 
+            "id": 36, 
+            "question": "What is the rank of a matrix <i class='math-font'>A</i>, and how is it found?", 
+            "answer": "The rank is the dimension of the column space, `text(Col)(A)`. It is equal to the number of pivot columns.", 
+            "checked": false 
+        },
+        { 
+            "id": 37, 
+            "question": "What is the nullity of a matrix <i class='math-font'>A</i>, and how is it found?", 
+            "answer": "The nullity is the dimension of the null space, `text(Nul)(A)`. It is equal to the number of free variables.", 
+            "checked": false 
+        },
+        { 
+            "id": 38, 
+            "question": "What is the Rank Theorem for an <i class='math-font'>m</i> &times; <i class='math-font'>n</i> matrix <i class='math-font'>A</i>?", 
+            "answer": "`text(rank)(A) + text(nullity)(A) = n`", 
+            "checked": false 
+        },
+        { 
+            "id": 39, 
+            "question": "For a linear transformation <i class='math-font'>T</i>(<b class='math-font'>x</b>) = <i class='math-font'>A</i><b class='math-font'>x</b> where <i class='math-font'>A</i> is an <i class='math-font'>m</i> &times; <i class='math-font'>n</i> matrix, what are its domain, codomain, and range?", 
+            "answer": "1. Domain: `RR^n` <br><br> 2. Codomain: `RR^m` <br><br> 3. Range: `text(Col)(A)`", 
+            "checked": false 
+        },
+        { 
+            "id": 40, 
+            "question": "How do you find the <i class='math-font'>i</i>&thinsp;th column of the standard matrix <i class='math-font'>A</i> for a linear transformation <i class='math-font'>T</i>?", 
+            "answer": "The `i`th column is given by `T(bb(e)_i)`, where `bb(e)_i` is the `i`th standard basis vector.", 
+            "checked": false 
+        },
+        { 
+            "id": 41, 
+            "question": "What are four equivalent ways to state that a linear transformation <i class='math-font'>T</i>(<b class='math-font'>x</b>) = <i class='math-font'>A</i><b class='math-font'>x</b> from &#8477;<sup><i class='math-font'>n</i></sup> to &#8477;<sup><i class='math-font'>m</i></sup> is <b>one-to-one</b>?", 
+            "answer": "1. `T(bb(x)) = bb(b)` has at most one solution for all `bb(b)`. <br><br> 2. `A bb(x) = bb(0)` has only the trivial solution. <br><br> 3. `A` has a pivot position in every column. <br><br> 4. `text(rank)(A) = n`", 
+            "checked": false 
+        },
+        { 
+            "id": 42, 
+            "question": "What are four equivalent ways to state that a linear transformation <i class='math-font'>T</i>(<b class='math-font'>x</b>) = <i class='math-font'>A</i><b class='math-font'>x</b> from &#8477;<sup><i class='math-font'>n</i></sup> to &#8477;<sup><i class='math-font'>m</i></sup> is <b>onto</b>?", 
+            "answer": "1. `T(bb(x)) = bb(b)` has at least one solution for all `bb(b)` in `RR^m`. <br><br> 2. `text(Col)(A) = RR^m` <br><br> 3. `A` has a pivot position in every row. <br><br> 4. `text(dim)(text(range)(T)) = text(dim)(text(Col)(A)) = m`", 
+            "checked": false 
+        },
+        { 
+            "id": 43, 
+            "question": "What two conditions must be satisfied for a transformation <i class='math-font'>T</i> to be linear?", 
+            "answer": "1. `T(bb(u) + bb(v)) = T(bb(u)) + T(bb(v))` for all `bb(u), bb(v)` in `RR^n` <br><br> 2. `T(c bb(u)) = cT(bb(u))` for all `bb(u)` in `RR^n` and scalars `c`", 
+            "checked": false 
+        },
+        { 
+            "id": 44, 
+            "question": "What is the standard matrix to rotate a vector in &#8477;<sup>2</sup> by an angle &theta;?", 
+            "answer": "`[[cos theta, -sin theta], [sin theta, cos theta]]`", 
+            "checked": false 
+        },
+        { 
+            "id": 45, 
+            "question": "How do you multiply matrices <i class='math-font'>A</i> and <i class='math-font'>B</i> using the <b>Dot Product Way</b>?", 
+            "answer": "`a_{ij} = (i text(th row) A) cdot (j text(th col. ) B)`", 
+            "checked": false 
+        },
+        { 
+            "id": 46, 
+            "question": "How do you multiply matrices <i class='math-font'>A</i> and <i class='math-font'>B</i> using the <b>Column Way</b>?", 
+            "answer": "`A(j text(th col. of ) B) = j text(th col. of ) AB`", 
+            "checked": false 
+        },
+        { 
+            "id": 47, 
+            "question": "How do you multiply matrices <i class='math-font'>A</i> and <i class='math-font'>B</i> using the <b>Row Way</b>?", 
+            "answer": "`(i text(th row of ) A)B = i text(th row of ) AB`", 
+            "checked": false 
+        },
+        { 
+            "id": 48, 
+            "question": "Does matrix multiplication typically commute?", 
+            "answer": "No, usually `AB != BA`.", 
+            "checked": false 
+        },
+        { 
+            "id": 49, 
+            "question": "If matrix <i class='math-font'>A</i> goes with transformation <i class='math-font'>T</i> and matrix <i class='math-font'>B</i> goes with transformation <i class='math-font'>U</i>, what is the standard matrix for the composition (<i class='math-font'>T</i> &#8728; <i class='math-font'>U</i>)(<b class='math-font'>x</b>)?", 
+            "answer": "The product matrix `AB`, since `(T @ U)(bb(x)) = T(U(bb(x))) = AB bb(x)`.", 
+            "checked": false 
+        },
+        { 
+            "id": 50, 
+            "question": "How do you calculate the inverse of a square matrix <i class='math-font'>A</i> by hand?", 
+            "answer": "Find `text(RREF)[A|I]`. If the final matrix is of the form `[I|A^-1]`, then the right side is the inverse. If `I` is not on the left, `A` is not invertible.", 
+            "checked": false 
+        },
+        { 
+            "id": 51, 
+            "question": "How can you use an inverse matrix to solve the system <i class='math-font'>A</i><b class='math-font'>x</b> = <b class='math-font'>b</b>?", 
+            "answer": "Compute `bb(x) = A^-1 bb(b)` (assuming `A^-1` exists and there is a single, particular solution).", 
+            "checked": false 
+        },
+        { 
+            "id": 52, 
+            "question": "According to the Invertible Matrix Theorem, if an <i class='math-font'>n</i> &times; <i class='math-font'>n</i> matrix <i class='math-font'>A</i> is invertible, what does that imply about its pivots and columns?", 
+            "answer": "1. `A` has `n` pivots. <br><br> 2. The columns of `A` are linearly independent. <br><br> 3. The columns of `A` form a basis of `RR^n`.", 
+            "checked": false 
+        },
+        { 
+            "id": 53, 
+            "question": "According to the Invertible Matrix Theorem, if an <i class='math-font'>n</i> &times; <i class='math-font'>n</i> matrix <i class='math-font'>A</i> is invertible, what does that imply about the transformation <i class='math-font'>T</i>(<b class='math-font'>x</b>) = <i class='math-font'>A</i><b class='math-font'>x</b>?", 
+            "answer": "The transformation `T` is both one-to-one and onto.", 
+            "checked": false 
+        },
+        { 
+            "id": 54, 
+            "question": "What is the determinant of a 2 &times; 2 matrix <i class='math-font'>A</i>?", 
+            "answer": "`text(det) A = |[a_11, a_12],[a_21, a_22]|` <br><br> `= a_11 a_22 - a_12 a_21`", 
+            "checked": false 
+        },
+        { 
+            "id": 55, 
+            "question": "In cofactor expansion, what is the formula for the cofactor <i class='math-font'>C<sub>ij</sub></i>?", 
+            "answer": "`C_{ij} = (-1)^{i+j} M_{ij}` <br><br> where the minor `M_{ij}` is the determinant of the submatrix derived by eliminating the `i`th row and `j`th column.", 
+            "checked": false 
+        },
+        { 
+            "id": 56, 
+            "question": "When computing a determinant using cofactor expansion, which row or column should you choose?", 
+            "answer": "Expand about the row or column with the most zero entries to minimize the number of terms.", 
+            "checked": false 
+        },
+        { 
+            "id": 57, 
+            "question": "What is the determinant of a triangular matrix?", 
+            "answer": "The product of its main diagonal entries.", 
+            "checked": false 
+        },
+        { 
+            "id": 58, 
+            "question": "If a matrix <i class='math-font'>A</i> has a row or column of zeros, or a repeated (or dependent) row or column, what is its determinant?", 
+            "answer": "`text(det) A = 0`", 
+            "checked": false 
+        },
+        { 
+            "id": 59, 
+            "question": "A matrix <i class='math-font'>A</i> is invertible if and only if ____________.", 
+            "answer": "`text(det) A != 0`", 
+            "checked": false 
+        },
+        { 
+            "id": 60, 
+            "question": "Complete the following determinant properties:<br><br>1. det(<i class='math-font'>AB</i>) = _______ <br><br>2. det(<i class='math-font'>A<sup>n</sup></i>) = _______ <br><br>3. det(<i class='math-font'>A</i><sup>&minus;1</sup>) = _______ <br><br>4. det(<i class='math-font'>A</i><sup>T</sup>) = _______", 
+            "answer": "1. `text(det)(AB) = text(det) A * text(det) B` <br><br> 2. `text(det)(A^n) = (text(det) A)^n` <br><br> 3. `text(det)(A^-1) = 1/(text(det) A)` <br><br> 4. `text(det) A^T = text(det) A`", 
+            "checked": false 
+        },
+        { 
+            "id": 61, 
+            "question": "How do the three row reduction operations affect the determinant of a matrix?", 
+            "answer": "1. <b>Scaling</b> a row/col by `k` yields a determinant of `k * text(det) A`. <br><br> 2. <b>Row replacement</b> does not change the determinant. <br><br> (must be of type `R_i \\mapsto R_i + k R_j`) <br><br> 3. <b>Swapping</b> rows/cols yields a determinant of `-text(det) A`.", 
+            "checked": false 
+        },
+        { 
+            "id": 62, 
+            "question": "What defines an eigenvector <b class='math-font'>v</b> and its corresponding eigenvalue &lambda; for an <i class='math-font'>n</i> &times; <i class='math-font'>n</i> matrix <i class='math-font'>A</i>?", 
+            "answer": "`A bb(v) = lambda bb(v)` <br><br> (where `bb(v)` is non-zero)", 
+            "checked": false 
+        },
+        { 
+            "id": 63, 
+            "question": "How do you find a basis for the &lambda;-eigenspace of a matrix <i class='math-font'>A</i>?", 
+            "answer": "The &lambda;-eigenspace is `text(Nul)(A - lambda I)`. Find its basis by solving the homogeneous system `(A - lambda I)bb(v) = bb(0)` in vector parametric form.", 
+            "checked": false 
+        },
+        { 
+            "id": 64, 
+            "question": "What are the eigenvalues of a triangular matrix?", 
+            "answer": "The entries on its main diagonal.", 
+            "checked": false 
+        },
+        { 
+            "id": 65, 
+            "question": "What is the characteristic polynomial of a matrix <i class='math-font'>A</i>, and what do its roots represent?", 
+            "answer": "`P(lambda) = text(det)(A - lambda I)` <br><br> The roots (or zeros) are the eigenvalues of `A`.", 
+            "checked": false 
+        },
+        { 
+            "id": 66, 
+            "question": "What is the algebraic multiplicity of an eigenvalue?", 
+            "answer": "The number of times its associated factor, `(lambda - r)`, repeats in the complete factorization of the characteristic polynomial.", 
+            "checked": false 
+        },
+        { 
+            "id": 67, 
+            "question": "When is an <i class='math-font'>n</i> &times; <i class='math-font'>n</i> matrix <i class='math-font'>A</i> diagonalizable?", 
+            "answer": "When it can be written as `A = PDP^-1`. According to the Diagonalization Theorem, this happens if and only if `A` has `n` linearly independent eigenvectors.", 
+            "checked": false 
+        },
+        { 
+            "id": 68, 
+            "question": "In the diagonalization <i class='math-font'>A</i> = <i class='math-font'>PDP</i><sup>&minus;1</sup>, what do the matrices <i class='math-font'>P</i> and <i class='math-font'>D</i> contain?", 
+            "answer": "`P` contains the eigenvectors of `A` as its columns. <br><br> `D` is a diagonal matrix containing the corresponding eigenvalues.", 
+            "checked": false 
+        },
+        { 
+            "id": 69, 
+            "question": "If an <i class='math-font'>n</i> &times; <i class='math-font'>n</i> matrix has <i class='math-font'>n</i> distinct eigenvalues, is it diagonalizable?", 
+            "answer": "Yes, because eigenvectors corresponding to distinct eigenvalues are always linearly independent.", 
+            "checked": false 
+        },
+        { 
+            "id": 70, 
+            "question": "What is the geometric multiplicity of an eigenvalue, and how does it relate to its algebraic multiplicity?", 
+            "answer": "It is the dimension of the corresponding eigenspace. It is always less than or equal to the algebraic multiplicity.", 
+            "checked": false 
+        },
+        { 
+            "id": 71, 
+            "question": "State the formula for the length (or magnitude/norm) of a vector <b class='math-font'>v</b>.", 
+            "answer": "`||bb(v)|| = sqrt(v_1^2 + v_2^2 + ... + v_n^2)`", 
+            "checked": false 
+        },
+        { 
+            "id": 72, 
+            "question": "How is the dot product <b class='math-font'>u</b> &bull; <b class='math-font'>v</b> calculated, and what does it indicate if it equals zero?", 
+            "answer": "`bb(u) * bb(v) = u_1 v_1 + u_2 v_2 + ... + u_n v_n` <br><br> If `bb(u) * bb(v) = 0`, the vectors are orthogonal.", 
+            "checked": false 
+        },
+        { 
+            "id": 73, 
+            "question": "How do you find the distance between two points represented by vectors <b class='math-font'>u</b> and <b class='math-font'>v</b>?", 
+            "answer": "`text(Distance) = ||bb(u) - bb(v)||`", 
+            "checked": false 
+        },
+        { 
+            "id": 74, 
+            "question": "State the relationship between the dot product of two vectors, their lengths, and the angle &theta; between them.", 
+            "answer": "`cos theta = (bb(u) * bb(v)) / (||bb(u)|| ||bb(v)||)`", 
+            "checked": false 
+        },
+        { 
+            "id": 75, 
+            "question": "What is the relationship between the row space of <i class='math-font'>A</i> and its transpose?", 
+            "answer": "`text(Row)(A) = text(Col)(A^T)`", 
+            "checked": false 
+        },
+        { 
+            "id": 76, 
+            "question": "What is the definition of <i class='math-font'>W-perp</i>, denoted <i class='math-font'>W</i><sup>&perp;</sup>, the  orthogonal complement of a subspace <i class='math-font'>W</i>?", 
+            "answer": "`W^(_|_)= {bb(v) in RR^n | bb(v) * bb(w) = 0 text( for all ) bb(w) in W}`", 
+            "checked": false 
+        },
+        { 
+            "id": 77, 
+            "question": "How do you find a basis for the orthogonal complement of <i class='math-font'>W</i>?", 
+            "answer": "Write a basis for `W` as the columns of a matrix `A`. The basis for `W^(_|_)` is `text(Nul)(A^T)`.", 
+            "checked": false 
+        },
+        { 
+            "id": 78, 
+            "question": "Relate the orthogonal complements of Column Space and Row Space to Null Spaces.", 
+            "answer": "1. `(text(Col) A)^(_|_) = text(Nul)(A^T)` <br><br> 2. `(text(Row) A)^(_|_) = text(Nul)(A)`", 
+            "checked": false 
+        },
+        { 
+            "id": 79, 
+            "question": "According to the Orthogonal Decomposition Theorem, how can any vector <b class='math-font'>b</b> be written with respect to a subspace <i class='math-font'>W</i>?", 
+            "answer": "Uniquely as `bb(b) = bb(b)_W + bb(b)_(W^(_|_))` <br><br> where `bb(b)_W` is the projection of `bb(b)` onto `W`.", 
+            "checked": false 
+        },
+        { 
+            "id": 80, 
+            "question": "Let <i class='math-font'>W</i> = Col(<i class='math-font'>A</i>). For any vector <b class='math-font'>b</b>, state the Big Theorem regarding the consistent system for orthogonal projections.", 
+            "answer": "`A^T A bb(x) = A^T bb(b)` is consistent, and `A hat(bb(x)) = bb(b)_W` for any solution `bb(x) = hat(bb(x))`.", 
+            "checked": false 
+        },
+        { 
+            "id": 81, 
+            "question": "State four conditions added to the Invertible Matrix Theorem involving determinants, eigenvalues, rank, and transposes.", 
+            "answer": "1. `text(det) A != 0` <br><br> 2. The number `0` is NOT an eigenvalue of `A`. <br><br> 3. `text(Rank)(A) = n` <br><br> 4. `A^T` is invertible.", 
+            "checked": false 
+        },
+        { 
+            "id": 82, 
+            "question": "What is the orthogonal complement of the orthogonal complement of a subspace <i class='math-font'>W</i>?", 
+            "answer": "`(W^(_|_))^(_|_) = W`", 
+            "checked": false 
+        },
+        { 
+            "id": 83, 
+            "question": "How does the row rank of a matrix relate to its column rank?", 
+            "answer": "They are equal. `text(Row rank of ) A = text(Column rank of ) A`", 
+            "checked": false 
+        },
+        { 
+            "id": 84, 
+            "question": "What does it mean for <b class='math-font'>x&#770;</b> to be a least squares estimate to the solution of <i class='math-font'>A</i><b class='math-font'>x</b> = <b class='math-font'>b</b>?", 
+            "answer": "Setting `bb(x) = hat(bb(x))` minimizes `||bb(b) - A bb(x)||`, which is the shortest distance from `bb(b)` to the column space of `A`.", 
+            "checked": false 
+        },
+        { 
+            "id": 85, 
+            "question": "What is the formula for the orthogonal projection of <b class='math-font'>b</b> onto a subspace <i class='math-font'>W</i> spanned by a single vector <b class='math-font'>v</b>?", 
+            "answer": "`text(proj)_W bb(b) = text(proj)_bb(v) bb(b) = (bb(b) * bb(v)) / (||bb(v)||^2) bb(v)`", 
+            "checked": false 
+        },
+        { 
+            "id": 86, 
+            "question": "If the columns of <i class='math-font'>A</i> are linearly independent, what can we say about <i class='math-font'>A</i><sup>T</sup><i class='math-font'>A</i> and the formula for <b class='math-font'>x&#770;</b>?", 
+            "answer": "`A^T A` is invertible, which implies: <br><br> `hat(bb(x)) = (A^T A)^-1 A^T bb(b)`", 
+            "checked": false 
+        },
+        { 
+            "id": 87, 
+            "question": "What are the four steps to find a best fit line or parabola for a set of data points?", 
+            "answer": "1. Write the general form of the equation with unknown coefficients. <br><br> 2. Plug in the given points to get a system of equations. <br><br> 3. Identify `A` and `bb(b)` and calculate `hat(bb(x))`. <br><br> 4. Fill in the general equation with the coefficients from `hat(bb(x))`.", 
+            "checked": false 
+        },
+        { 
+            "id": 88, 
+            "question": "What is the difference between an <b>orthogonal</b> set of vectors and an <b>orthonormal</b> set of vectors?", 
+            "answer": "An orthogonal set has distinct members that are all orthogonal to each other. <br><br> An orthonormal set is an orthogonal set where every member is also a unit vector.", 
+            "checked": false 
+        },
+        { 
+            "id": 89, 
+            "question": "Any orthogonal set of nonzero vectors is also __________________.", 
+            "answer": "Linearly independent.", 
+            "checked": false 
+        },
+        { 
+            "id": 90, 
+            "question": "If {<b class='math-font'>v</b><sub>1</sub>, <b class='math-font'>v</b><sub>2</sub>, ..., <b class='math-font'>v</b><sub><i class='math-font'>p</i></sub>} forms an orthogonal basis for a subspace <i class='math-font'>W</i>, what is the formula for the projection of <b class='math-font'>b</b> onto <i class='math-font'>W</i>?", 
+            "answer": "`bb(b)_W = (bb(b) * bb(v)_1)/(||bb(v)_1||^2) bb(v)_1 + (bb(b) * bb(v)_2)/(||bb(v)_2||^2) bb(v)_2 + ... + (bb(b) * bb(v)_p)/(||bb(v)_p||^2) bb(v)_p`", 
+            "checked": false 
+        },
+        { 
+            "id": 91, 
+            "question": "What is the purpose of the Gram-Schmidt algorithm?", 
+            "answer": "It transforms a regular basis `{bb(u)_1, bb(u)_2, ..., bb(u)_p}` into an orthogonal basis `{bb(v)_1, bb(v)_2, ..., bb(v)_p}`.", 
+            "checked": false 
+        },
+        { 
+            "id": 92, 
+            "question": "In the Gram-Schmidt algorithm, what is the formula for each new orthogonal vector <b class='math-font'>v</b><sub><i class='math-font'>i</i></sub>?", 
+            "answer": "`bb(v)_i = bb(u)_i - text(proj)_X bb(u)_i` <br><br> (Where `X` is the partial orthogonal basis formed by the previously computed `bb(v)` vectors).", 
+            "checked": false 
+        },
+        { 
+            "id": 93, 
+            "question": "In the QR-Factorization <i class='math-font'>A</i> = <i class='math-font'>QR</i>, what are the properties of matrices <i class='math-font'>Q</i> and <i class='math-font'>R</i>?", 
+            "answer": "`Q` has columns that form an orthonormal basis for `text(Col)(A)`. <br><br> `R` is an upper triangular matrix.", 
+            "checked": false 
+        },
+        { 
+            "id": 94, 
+            "question": "Using the QR-Factorization of <i class='math-font'>A</i>, what is a more numerically stable formula for the least squares solution <b class='math-font'>x&#770;</b>?", 
+            "answer": "`hat(bb(x)) = R^-1 Q^T bb(b)`", 
+            "checked": false 
+        }
+    ]
+}
