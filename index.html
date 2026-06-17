@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Math Flashcards</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MathCards">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            asciimath2jax: { delimiters: [['`','`']], preview: "none" },
+            "HTML-CSS": { 
+                linebreaks: { automatic: true, width: "container" }, 
+                imageFont: null,
+                scale: 90
+            },
+            displayAlign: "center", messageStyle: "none"
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=AM_CHTML"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css">
+
+    <style>
+        :root {
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
+        }
+
+        body {
+            padding-top: var(--safe-top);
+            padding-bottom: var(--safe-bottom);
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            background: #0f172a; 
+            overscroll-behavior-y: none;
+        }
+
+        @keyframes slideUpToFront {
+            from { transform: scale(0.95) translateY(15px); opacity: 0.5; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .animate-to-front {
+            animation: slideUpToFront 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .flip-card { perspective: 1000px; }
+        .flip-card-inner {
+            position: relative; width: 100%; height: 100%;
+            transition: transform 0.6s; transform-style: preserve-3d;
+        }
+        .flip-card-inner.flipped { transform: rotateY(180deg); }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; border: 3px solid #4f46e5;
+            border-radius: 1.5rem; padding: 1.5rem;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            font-size: clamp(0.9rem, 4.5vw, 1.3rem); 
+            box-sizing: border-box;
+            word-break: break-word;
+            background: white;
+            overflow-y: auto; /* Added to fix long formulas */
+        }
+        .flip-card-back { transform: rotateY(180deg); }
+
+        .card-checkbox-overlay {
+            position: absolute; top: 1.25rem; right: 1.25rem; z-index: 50; 
+            width: 28px; height: 28px; cursor: pointer; accent-color: #4f46e5;
+        }
+
+        .nav-zone {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 50px; height: 80px; display: flex;
+            align-items: center; justify-content: center;
+            cursor: pointer; z-index: 60; transition: opacity 0.2s;
+            background: rgba(79, 70, 229, 0.9);
+            color: white; border-radius: 8px; font-size: 20px;
+        }
+        
+        @media (hover: hover) { 
+            .nav-zone { opacity: 0.6; } 
+            .nav-zone:hover:not(.disabled) { opacity: 1; } 
+        }
+        
+        @media (hover: none) { .nav-zone { opacity: 0.2; width: 40px; } }
+
+        .nav-zone.left { left: -60px; }
+        .nav-zone.right { right: -60px; }
+        
+        .nav-zone.bottom { 
+            top: auto; 
+            bottom: -70px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 60px; 
+            height: 50px; 
+        }
+
+        @media (max-width: 640px) {
+            .nav-zone.left { left: 5px; }
+            .nav-zone.right { right: 5px; }
+            .nav-zone.bottom { bottom: -55px; }
+        }
+
+        .nav-zone.disabled { pointer-events: none; visibility: hidden; }
+        .MathJax_Display { display: inline !important; margin: 0 !important; }
+
+        .icon-btn {
+            width: 44px; height: 44px; display: flex;
+            align-items: center; justify-content: center;
+            border-radius: 50%; background: white;
+            border: 1px solid #e2e8f0; color: #64748b;
+            font-size: 20px; cursor: pointer;
+        }
+
+        .flip-card-front div, .flip-card-back div {
+            width: 100%;
+            overflow-wrap: break-word;
+        }
+        .mjx-chtml {
+            max-width: 100% !important;
+            display: inline-block !important;
+        }
+
+        .math-font {
+            font-family: "Computer Modern Serif", "Times New Roman", serif;
+            -webkit-font-smoothing: auto;
+            -moz-osx-font-smoothing: auto;
+        }
+
+        b.math-font {
+            font-weight: 700;
+            text-shadow: 0.3px 0.3px 0px currentColor; 
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-100 overflow-x-hidden">
+    <div id="app" class="p-4 md:p-8">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold text-white mb-6 text-center">Flashcards</h1>
+            <div id="content"></div>
+        </div>
+    </div>
+
+    <script>
+        // --- YOUR FILE DIRECTORY ---
+        // Since browsers can't scan folders automatically, list your files here.
+        // Make sure these files are uploaded to the same main directory as this HTML file.
+        const JSON_FILES = [
+            { title: "Linear Algebra", filename: "LinearAlgebra.json" },
+            { title: "Calculus 3", filename: "Calculus3.json" }
+        ];
+        
+        let currentSet = null;
+        let studyMode = false;
+        let currentCardIndex = 0;
+        let isFlipped = false;
+        let activeStudyCards = [];
+        let navDirection = 'forward'; 
+
+        function render() {
+            const content = document.getElementById('content');
+            const title = document.querySelector('h1');
+            if (studyMode) { 
+                content.innerHTML = renderStudyMode(); 
+                title.classList.add('hidden'); 
+            } else if (!currentSet) { 
+                content.innerHTML = renderSetsList(); 
+                title.classList.remove('hidden'); 
+            } else { 
+                content.innerHTML = renderSetEditor(); 
+                title.classList.remove('hidden'); 
+            }
+            setTimeout(() => { if (window.MathJax) MathJax.Hub.Queue(['Typeset', MathJax.Hub, content]); }, 50);
+        }
+
+        function renderSetsList() {
+            let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">';
+            
+            JSON_FILES.forEach(item => {
+                html += `<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold mb-4 text-slate-800">${escapeHtml(item.title)}</h3>
+                    <button onclick="loadSet('${item.filename}', '${escapeHtml(item.title)}')" class="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold">Open Set</button>
+                </div>`;
+            });
+            
+            html += '</div>';
+            return html;
+        }
+
+        function loadSet(filename, friendlyTitle) {
+            // Attempt to fetch the file from the same directory
+            fetch(filename)
+                .then(response => {
+                    if (!response.ok) throw new Error("File not found");
+                    return response.json();
+                })
+                .then(data => {
+                    // Extract the cards based on how the JSON is formatted
+                    let loadedCards = [];
+                    if (Array.isArray(data)) {
+                        loadedCards = data;
+                    } else if (data.cards) {
+                        loadedCards = data.cards;
+                        if (data.name) friendlyTitle = data.name;
+                    }
+
+                    // Assign it to our current session
+                    currentSet = {
+                        id: filename,
+                        name: friendlyTitle,
+                        cards: loadedCards
+                    };
+                    
+                    render();
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert(`Could not load ${filename}. Check that the file exists and is uploaded to your GitHub repository.`);
+                });
+        }
+
+        function renderSetEditor() {
+            const starredCount = currentSet.cards.filter(c => c.checked).length;
+            const allChecked = starredCount === currentSet.cards.length && currentSet.cards.length > 0;
+            let html = `<div class="flex flex-col gap-4 mb-6">
+                <div class="flex items-center justify-between">
+                    <button onclick="backToSets()" class="text-indigo-400 font-bold p-2">← Back to Sets</button>
+                    <div class="flex gap-2">
+                        <button onclick="startStudy(false)" class="px-4 py-2 bg-slate-700 text-white rounded-full text-sm font-bold">Study All</button>
+                        <button onclick="startStudy(true)" ${starredCount === 0 ? 'disabled' : ''} class="px-4 py-2 bg-indigo-600 text-white rounded-full text-sm font-bold shadow-lg disabled:opacity-30">Checked (${starredCount})</button>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <button onclick="toggleAllCards()" class="text-xs font-bold text-slate-400 uppercase tracking-wider">${allChecked ? 'Uncheck All' : 'Check All'}</button>
+                </div>
+            </div>
+            
+            <div class="space-y-3 pb-20">`;
+            currentSet.cards.forEach((card, i) => {
+                html += `<div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex justify-between items-start">
+                    <div class="flex-1 pr-4">
+                        <div class="text-xs font-bold text-slate-500 uppercase mb-1">Card ${i+1}</div>
+                        <div class="text-slate-100 font-medium">${card.question}</div>
+                        <div class="text-indigo-300 text-sm mt-1">${card.answer}</div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" class="card-checkbox" ${card.checked ? 'checked' : ''} onchange="toggleCheck(${i})" style="width:24px; height:24px; accent-color:#4f46e5; cursor:pointer;">
+                    </div></div>`;
+            });
+            return html + '</div>';
+        }
+
+        function renderStudyMode() {
+            if (activeStudyCards.length === 0) return '';
+            
+            const card = activeStudyCards[currentCardIndex];
+            const masterIndex = currentSet.cards.findIndex(c => c.id === card.id);
+            const isChecked = masterIndex !== -1 ? currentSet.cards[masterIndex].checked : false;
+            
+            return `<div class="w-full max-w-xl mx-auto flex flex-col min-h-[85vh] relative">
+                <div class="flex justify-center mb-6">
+                    <div class="px-3 py-1 bg-slate-800 rounded-full text-xs font-bold text-slate-400">${currentCardIndex + 1} / ${activeStudyCards.length}</div>
+                </div>
+                <div class="relative flex-1 flex flex-col items-center justify-center w-full">
+                    <div class="w-[90vw] max-w-[400px] flex justify-between mb-4 px-1">
+                        <button onclick="shuffleCards()" class="icon-btn">↺</button>
+                        <button onclick="exitStudy()" class="icon-btn">✕</button>
+                    </div>
+                    
+                    <div class="relative flex items-center justify-center w-full">
+                        <div class="nav-zone left ${currentCardIndex === 0 ? 'disabled' : ''}" onclick="triggerSwipeOut('prev')">←</div>
+                        
+                        <div class="relative" style="width: 90vw; max-width: 400px; height: 60vh; max-height: 550px; touch-action: none;">
+                            
+                            ${currentCardIndex < activeStudyCards.length - 1 ? `
+                                <div class="absolute inset-0 z-0" style="transform: scale(0.95) translateY(15px); opacity: 0.5; pointer-events: none;">
+                                    <div class="flip-card-front text-slate-900 shadow-xl" style="position: relative; width: 100%; height: 100%;">
+                                        <div>${activeStudyCards[currentCardIndex + 1].question}</div>
+                                    </div>
+                                </div>
+                            ` : ''}
+
+                            <div id="active-card" class="absolute inset-0 z-10 flip-card ${navDirection === 'forward' ? 'animate-to-front' : ''} cursor-pointer" onclick="flipCard()" style="margin: 0; width: 100%; height: 100%;">
+                                <input type="checkbox" class="card-checkbox-overlay" ${isChecked ? 'checked' : ''} onclick="event.stopPropagation(); syncCheck(${masterIndex})">
+                                <div class="flip-card-inner ${isFlipped ? 'flipped' : ''}">
+                                    <div class="flip-card-front text-slate-900 shadow-xl"><div>${card.question}</div></div>
+                                    <div class="flip-card-back text-slate-900 shadow-xl"><div>${card.answer}</div></div>
+                                </div>
+                            </div>
+                            
+                            ${currentCardIndex > 0 ? `
+                                <div id="prev-card" class="absolute inset-0 z-20 pointer-events-none" style="transform: translateX(-150vw) rotate(-15deg);">
+                                    <div class="flip-card-front text-slate-900 shadow-2xl" style="position: relative; width: 100%; height: 100%;">
+                                        <div>${activeStudyCards[currentCardIndex - 1].question}</div>
+                                    </div>
+                                </div>
+                            ` : ''}
+
+                        </div>
+
+                        <div class="nav-zone right ${currentCardIndex === activeStudyCards.length - 1 ? 'disabled' : ''}" onclick="triggerSwipeOut('next')">→</div>
+                        
+                        <div class="nav-zone bottom" title="Eliminate from session" onclick="triggerSwipeOut('down')">↓</div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function toggleCheck(index) { currentSet.cards[index].checked = !currentSet.cards[index].checked; render(); }
+        function syncCheck(masterIndex) { currentSet.cards[masterIndex].checked = !currentSet.cards[masterIndex].checked; }
+        
+        function startStudy(onlyChecked) {
+            activeStudyCards = onlyChecked ? currentSet.cards.filter(c => c.checked) : [...currentSet.cards];
+            if (activeStudyCards.length === 0) return;
+            studyMode = true; currentCardIndex = 0; isFlipped = false; navDirection = 'forward'; 
+            
+            document.body.style.overflow = 'hidden';
+            render();
+        }
+        
+        function flipCard() {
+            if (typeof swipeDistance !== 'undefined' && swipeDistance > 15) return;
+            isFlipped = !isFlipped;
+            const inner = document.querySelector('.flip-card-inner');
+            if (inner) {
+                inner.classList.toggle('flipped', isFlipped);
+                setTimeout(() => { if (window.MathJax) MathJax.Hub.Queue(['Typeset', MathJax.Hub, inner]); }, 100);
+            }
+        }
+        
+        function nextCard() { if (currentCardIndex < activeStudyCards.length - 1) { currentCardIndex++; isFlipped = false; navDirection = 'forward'; render(); } }
+        function prevCard() { if (currentCardIndex > 0) { currentCardIndex--; isFlipped = false; navDirection = 'backward'; render(); } }
+        
+        function eliminateCurrentCard() {
+            activeStudyCards.splice(currentCardIndex, 1);
+            if (activeStudyCards.length === 0) {
+                exitStudy();
+                return;
+            }
+            if (currentCardIndex >= activeStudyCards.length) {
+                currentCardIndex = activeStudyCards.length - 1;
+            }
+            isFlipped = false;
+            navDirection = 'forward'; 
+            render();
+        }
+        
+        function backToSets() { 
+            currentSet = null; studyMode = false; 
+            document.body.style.overflow = ''; 
+            render(); 
+        }
+        function exitStudy() { 
+            studyMode = false; 
+            document.body.style.overflow = ''; 
+            render(); 
+        }
+        function shuffleCards() { activeStudyCards.sort(() => Math.random() - 0.5); currentCardIndex = 0; isFlipped = false; navDirection = 'forward'; render(); }
+        function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+        
+        function toggleAllCards() {
+            const anyUnchecked = currentSet.cards.some(c => !c.checked);
+            currentSet.cards.forEach(c => c.checked = anyUnchecked);
+            render();
+        }
+
+        // --- REAL-TIME TOUCH / SWIPE LOGIC ---
+        let touchstartX = 0;
+        let touchstartY = 0;
+        let isDragging = false;
+        let activeCardEl = null;
+        let prevCardEl = null;
+        let swipeDistance = 0; 
+
+        document.addEventListener('touchstart', e => {
+            if (!studyMode || !e.target.closest('#active-card')) return;
+            
+            touchstartX = e.changedTouches[0].screenX;
+            touchstartY = e.changedTouches[0].screenY;
+            isDragging = true;
+            swipeDistance = 0;
+            
+            activeCardEl = document.getElementById('active-card');
+            prevCardEl = document.getElementById('prev-card');
+            
+            if (activeCardEl) activeCardEl.style.transition = 'none'; 
+            if (prevCardEl) prevCardEl.style.transition = 'none'; 
+        }, { passive: true });
+
+        document.addEventListener('touchmove', e => {
+            if (!studyMode) return;
+            if (isDragging) {
+                e.preventDefault();
+            }
+
+            if (!isDragging || !activeCardEl) return;
+            
+            let currentX = e.changedTouches[0].screenX;
+            let currentY = e.changedTouches[0].screenY;
+            let deltaX = currentX - touchstartX;
+            let deltaY = currentY - touchstartY;
+
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (deltaX < 0) { 
+                    let rotate = deltaX * 0.05; 
+                    activeCardEl.style.transform = `translateX(${deltaX}px) rotate(${rotate}deg)`;
+                    if (prevCardEl) prevCardEl.style.transform = `translateX(-150vw) rotate(-15deg)`; 
+                } else { 
+                    activeCardEl.style.transform = `translateX(0px) rotate(0deg)`; 
+                    if (prevCardEl) {
+                        let cardWidth = activeCardEl.offsetWidth;
+                        let offset = -cardWidth + deltaX;
+                        if (offset > 0) offset = 0; 
+                        let rotate = (offset / cardWidth) * 15; 
+                        prevCardEl.style.transform = `translateX(${offset}px) rotate(${rotate}deg)`;
+                    }
+                }
+            } else {
+                if (deltaY > 0) {
+                    let rotate = deltaY * 0.02; 
+                    activeCardEl.style.transform = `translateY(${deltaY}px) rotate(${rotate}deg)`;
+                    if (prevCardEl) prevCardEl.style.transform = `translateX(-150vw) rotate(-15deg)`;
+                }
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', e => {
+            if (!studyMode || !isDragging || !activeCardEl) return;
+            isDragging = false;
+            
+            let touchendX = e.changedTouches[0].screenX;
+            let touchendY = e.changedTouches[0].screenY;
+            let deltaX = touchendX - touchstartX;
+            let deltaY = touchendY - touchstartY;
+            const swipeThreshold = 80;
+
+            activeCardEl.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+            if (prevCardEl) prevCardEl.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (deltaX < -swipeThreshold && currentCardIndex < activeStudyCards.length - 1) {
+                    activeCardEl.style.transform = `translateX(-150vw) rotate(-15deg)`;
+                    activeCardEl.style.opacity = '0';
+                    setTimeout(() => nextCard(), 300);
+                } else if (deltaX > swipeThreshold && currentCardIndex > 0) {
+                    if (prevCardEl) {
+                        prevCardEl.style.transform = `translateX(0px) rotate(0deg)`;
+                    }
+                    setTimeout(() => prevCard(), 300);
+                } else {
+                    activeCardEl.style.transform = `translateX(0px) translateY(0px) rotate(0deg)`;
+                    if (prevCardEl) {
+                        prevCardEl.style.transform = `translateX(-150vw) rotate(-15deg)`;
+                    }
+                }
+            } else {
+                if (deltaY > swipeThreshold) {
+                    activeCardEl.style.transform = `translateY(150vh) rotate(15deg)`;
+                    activeCardEl.style.opacity = '0';
+                    setTimeout(() => eliminateCurrentCard(), 300);
+                } else {
+                    activeCardEl.style.transform = `translateX(0px) translateY(0px) rotate(0deg)`;
+                    if (prevCardEl) {
+                        prevCardEl.style.transform = `translateX(-150vw) rotate(-15deg)`;
+                    }
+                }
+            }
+        }, { passive: true });
+
+        function triggerSwipeOut(direction) {
+            const activeCard = document.getElementById('active-card');
+            const prevCardEl = document.getElementById('prev-card');
+            
+            if (direction === 'next') { 
+                if (activeCard && currentCardIndex < activeStudyCards.length - 1) {
+                    activeCard.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+                    activeCard.style.transform = 'translateX(-150vw) rotate(-15deg)';
+                    activeCard.style.opacity = '0';
+                    setTimeout(() => nextCard(), 300);
+                }
+            } else if (direction === 'prev') { 
+                if (prevCardEl && currentCardIndex > 0) {
+                    prevCardEl.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+                    prevCardEl.style.transform = 'translateX(0px) rotate(0deg)';
+                    setTimeout(() => prevCard(), 300);
+                }
+            } else if (direction === 'down') {
+                if (activeCard) {
+                    activeCard.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+                    activeCard.style.transform = 'translateY(150vh) rotate(15deg)';
+                    activeCard.style.opacity = '0';
+                    setTimeout(() => eliminateCurrentCard(), 300);
+                }
+            }
+        }
+
+        render();
+    </script>
+</body>
+</html>
