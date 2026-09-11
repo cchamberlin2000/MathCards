@@ -1,6 +1,6 @@
 {
     "id": 102,
-    "name": "Precalculus Formulas",
+    "name": "College Algebra Formulas",
     "cards": [
         { 
             "id": 1, 
@@ -70,54 +70,60 @@
         },
         { 
             "id": 12, 
+            "question": "<strong>The Quadratic Formula:</strong>  <br><br> The solutions of the quadratic equation `ax^2 + bx + c = 0` are given by", 
+            "answer": "`x = (-b ± sqrt(b^2 - 4ac))/(2a)`", 
+            "checked": false 
+        },   
+        { 
+            "id": 13, 
             "question": "The Remainder Theorem", 
             "answer": "If `R` is the remainder when `P(x)` is divided by `x - c`, then `R = P(c)`.", 
             "checked": false 
         },
         { 
-            "id": 13, 
+            "id": 14, 
             "question": "The Factor Theorem", 
             "answer": "The number `c` is a zero of a polynomial `P(x)` if and only if `x - c` is a factor of `P(x)`.", 
             "checked": false 
         },
         {
-            "id": 14,
+            "id": 15,
             "question": "The Difference Quotient for `y = f(x)`.",
             "answer": "`(f(x+h)-f(x))/h`",
             "checked": false
         },
         {
-            "id": 15,
+            "id": 16,
             "question": "The Leading Term Test",
             "answer": "For extreme `x`-values of a polynomial, as goes the graph of the leading term (height-wise), so goes the height values of the entire polynomial.",
             "checked": false
         },
         {
-            "id": 16,
+            "id": 17,
             "question": "The behavior of the graph of `y = P(x)` at its <i class='math-font'>x</i>-intercepts",
             "answer": "If the corresponding zero has an <b>odd multiplicity</b>, the graph <b>crosses</b> the `x`-axis at that intercept. <br><br> If the corresponding zero has an <b>even multiplicity</b>, the graph touches or <b>\"bounces off\"</b> the `x`-axis at that intercept.",
             "checked": false
         },
         {
-            "id": 17,
+            "id": 18,
             "question": "<strong>The Intermediate Value Theorem:</strong>  <br><br> Suppose `P(a) != P(b)`, where `a < b`.",
             "answer": "`P(x)` takes on every value between `P(a)` and `P(b)` on the interval `[a, b]`. <br><br> <i>(Note: This implies that if `P(a)` and `P(b)` have opposite signs, there is at least one zero between `a` and `b`.)</i>",
             "checked": false
         },
         {
-            "id": 18,
+            "id": 19,
             "question": "The Rational Zero Theorem.",
             "answer": "If a polynomial `P(x)` has integer coefficients, then every rational zero of `P(x)` is of the form `p/q`, where `p` is a factor of the constant term and `q` is a factor of the leading coefficient.",
             "checked": false
         },
         {
-            "id": 19,
+            "id": 20,
             "question": "The Conjugate Pairs Theorem.",
             "answer": "Suppose `P(x)` has real coefficients, Then `a + bi` is a zero of `P(x)` if and only if `a - bi` is also a zero.",
             "checked": false
         },
         {
-            "id": 20,
+            "id": 21,
             "question": "The Fundamental Theorem of Algebra (FTA).",
             "answer": "Any polynomial of degree `n >= 1` with complex coefficients has exactly `n` zeros, counting multiplicities.",
             "checked": false
