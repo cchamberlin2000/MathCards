@@ -35,7 +35,7 @@
         { 
             "id": 6, 
             "question": "The Binomial Theorem", 
-            "answer": "`(a + b)^n = ((n),(0))a^n + ((n),(1))a^(n-1)b`<br> `+ ((n),(2))a^(n-2)b^2 + ... + b^n`", 
+            "answer": "`(a + b)^n = ((n),(0))a^n + ((n),(1))a^(n-1)b`<br> `+ ((n),(2))a^(n-2)b^2 + ... + ((n),(n))b^n`", 
             "checked": false 
         },
         { 
