@@ -1,0 +1,120 @@
+{
+    "id": 102,
+    "name": "Precalculus Formulas",
+    "cards": [
+        { 
+            "id": 1, 
+            "question": "<i class='math-font'>n</i>th term of an arithmetic sequence.", 
+            "answer": "`a_n = a_1 + (n-1)d`", 
+            "checked": false 
+        },
+        { 
+            "id": 2, 
+            "question": "Sum of the first <i class='math-font'>n</i> terms of an arithmetic series.", 
+            "answer": "`S_n = n/2(a_1 + a_n)`", 
+            "checked": false 
+        },
+        { 
+            "id": 3, 
+            "question": "<i class='math-font'>n</i>th term of a geometric sequence.", 
+            "answer": "`a_n = a_1 r^(n-1)`", 
+            "checked": false 
+        },
+        { 
+            "id": 4, 
+            "question": "Sum of the first <i class='math-font'>n</i> terms of a geometric series.", 
+            "answer": "`S_n = (a_1(1-r^n))/(1-r)` for `r != 1`", 
+            "checked": false 
+        },
+        { 
+            "id": 5, 
+            "question": "Sum of an infinite geometric series.", 
+            "answer": "`S = a_1/(1-r)` for `|r| < 1`", 
+            "checked": false 
+        },
+        { 
+            "id": 6, 
+            "question": "The Binomial Theorem", 
+            "answer": "`(a + b)^n = ((n),(0))a^n + ((n),(1))a^(n-1)b`<br> `+ ((n),(2))a^(n-2)b^2 + ... + b^n`", 
+            "checked": false 
+        },
+        { 
+            "id": 7, 
+            "question": "The Pythagorean theorem", 
+            "answer": " `a^2 + b^2 = c^2`, where `c` is the hypotenuse of a right triangle and `a` and `b` are the lengths of the other two sides.", 
+            "checked": false 
+        },
+        { 
+            "id": 8, 
+            "question": "The Distance Formula", 
+            "answer": "`d = sqrt((x_2 - x_1)^2 + (y_2 - y_1)^2)`", 
+            "checked": false 
+        },
+        { 
+            "id": 9, 
+            "question": "The Standard Form of the Equation of a Circle", 
+            "answer": "`(x - h)^2 + (y - k)^2 = r^2` <br><br> where `(h, k)` is the center of the circle and `r` is the radius.", 
+            "checked": false 
+        },
+        { 
+            "id": 10, 
+            "question": "The definition of a polynomial function of degree <i class='math-font'>n</i> with one variable.", 
+            "answer": "`P(x) = a_n x^n + a_(n-1) x^(n-1)`<br> `+ a_(n-2) x^(n-2) + ... + a_1 x + a_0` <br><br> where <i class='math-font'>n</i> is a nonnegative integer, `a_n != 0`. ", 
+            "checked": false 
+        },
+        { 
+            "id": 11, 
+            "question": "The Remainder Theorem", 
+            "answer": "If `R` is the remainder when `P(x)` is divided by `x - c`, then `R = P(c)`.", 
+            "checked": false 
+        },
+        { 
+            "id": 12, 
+            "question": "The Factor Theorem", 
+            "answer": "The number `c` is a zero of a polynomial `P(x)` if and only if `x - c` is a factor of `P(x)`.", 
+            "checked": false 
+        },
+        {
+            "id": 13,
+            "question": "The Difference Quotient for `y = f(x)`.",
+            "answer": "`(f(x+h)-f(x))/h`",
+            "checked": false
+        },
+        {
+            "id": 14,
+            "question": "The Leading Term Test",
+            "answer": "For extreme `x`-values of a polynomial, as goes the graph of the leading term (height-wise), so goes the height values of the entire polynomial.",
+            "checked": false
+        },
+        {
+            "id": 15,
+            "question": "The behavior of the graph of `y = P(x)` at its <i class='math-font'>x</i>-intercepts",
+            "answer": "If the corresponding zero has an <b>odd multiplicity</b>, the graph <b>crosses</b> the `x`-axis at that intercept. <br><br> If the corresponding zero has an <b>even multiplicity</b>, the graph touches or <b>\"bounces off\"</b> the `x`-axis at that intercept.",
+            "checked": false
+        },
+        {
+            "id": 16,
+            "question": "<strong>The Intermediate Value Theorem:</strong>  <br><br> Suppose `P(a) != P(b)`, where `a < b`.",
+            "answer": "`P(x)` takes on every value between `P(a)` and `P(b)` on the interval `[a, b]`. <br><br> <i>(Note: This implies that if `P(a)` and `P(b)` have opposite signs, there is at least one zero between `a` and `b`.)</i>",
+            "checked": false
+        },
+        {
+            "id": 17,
+            "question": "The Rational Zero Theorem.",
+            "answer": "If a polynomial `P(x)` has integer coefficients, then every rational zero of `P(x)` is of the form `p/q`, where `p` is a factor of the constant term and `q` is a factor of the leading coefficient.",
+            "checked": false
+        },
+        {
+            "id": 18,
+            "question": "The Conjugate Pairs Theorem.",
+            "answer": "Suppose `P(x)` has real coefficients, Then `a + bi` is a zero of `P(x)` if and only if `a - bi` is also a zero.",
+            "checked": false
+        },
+        {
+            "id": 19,
+            "question": "The Fundamental Theorem of Algebra (FTA).",
+            "answer": "Any polynomial of degree `n >= 1` with complex coefficients has exactly `n` zeros, counting multiplicities.",
+            "checked": false
+        }
+    ]
+}
