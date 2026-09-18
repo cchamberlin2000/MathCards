@@ -77,7 +77,7 @@
         { 
             "id": 13, 
             "question": "In Gaussian Elimination, what are the three allowable row operations that, when applied to an augmented matrix, yield another augmented matrix corresponding to a system with the same solution set?", 
-            "answer": "1. Row swaps <br><br> 2. Row scales (multiply a row by a scalar) <br><br> 3. Row replacements (new row is a sum of multiples of two rows)", 
+            "answer": "1. Row swaps <br><br> 2. Row scales (multiply a row by a scalar) <br><br> 3. Row replacements (new row is a sum of a multiple of the pivot row and the row to be replaced)", 
             "checked": false 
         },
         { 
