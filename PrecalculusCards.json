@@ -4,25 +4,25 @@
     "cards": [
         { 
             "id": 1, 
-            "question": "<i class='math-font'>n</i>th term of an arithmetic sequence.", 
+            "question": "`n`th term of an arithmetic sequence.", 
             "answer": "`a_n = a_1 + (n-1)d`", 
             "checked": false 
         },
         { 
             "id": 2, 
-            "question": "Sum of the first <i class='math-font'>n</i> terms of an arithmetic series.", 
+            "question": "Sum of the first `n` terms of an arithmetic series.", 
             "answer": "`S_n = n/2(a_1 + a_n)`", 
             "checked": false 
         },
         { 
             "id": 3, 
-            "question": "<i class='math-font'>n</i>th term of a geometric sequence.", 
+            "question": "`n`th term of a geometric sequence.", 
             "answer": "`a_n = a_1 r^(n-1)`", 
             "checked": false 
         },
         { 
             "id": 4, 
-            "question": "Sum of the first <i class='math-font'>n</i> terms of a geometric series.", 
+            "question": "Sum of the first `n` terms of a geometric series.", 
             "answer": "`S_n = (a_1(1-r^n))/(1-r)` for `r != 1`", 
             "checked": false 
         },
@@ -50,14 +50,12 @@
             "answer": "`(rise)/(run) = (y_2 - y_1)/(x_2 - x_1)`", 
             "checked": false 
         },
-        
         { 
             "id": 9, 
             "question": "Point-Slope Form of the Equation of a line", 
             "answer": "`y - y_1 = m(x - x_1)`", 
             "checked": false 
         },
-
         { 
             "id": 10, 
             "question": "The Distance Formula", 
@@ -72,14 +70,14 @@
         },
         { 
             "id": 12, 
-            "question": "The definition of a polynomial function of degree <i class='math-font'>n</i> with one variable.", 
-            "answer": "`P(x) = a_n x^n + a_(n-1) x^(n-1)`<br> `+ a_(n-2) x^(n-2) + ... + a_1 x + a_0` <br><br> where <i class='math-font'>n</i> is a nonnegative integer, `a_n != 0`. ", 
+            "question": "The definition of a polynomial function of degree `n` with one variable.", 
+            "answer": "`P(x) = a_n x^n + a_(n-1) x^(n-1)`<br> `+ a_(n-2) x^(n-2) + ... + a_1 x + a_0` <br><br> where `n` is a nonnegative integer, `a_n != 0`, and `a_0, a_1, ..., a_n` are constants.", 
             "checked": false 
         },
         { 
             "id": 13, 
             "question": "<strong>The Quadratic Formula:</strong>  <br><br> The solutions of the quadratic equation `ax^2 + bx + c = 0` are given by", 
-            "answer": "`x = (-b ± sqrt(b^2 - 4ac))/(2a)`", 
+            "answer": "`x = (-b +- sqrt(b^2 - 4ac))/(2a)`", 
             "checked": false 
         },   
         { 
@@ -108,7 +106,7 @@
         },
         {
             "id": 18,
-            "question": "The behavior of the graph of `y = P(x)` at its <i class='math-font'>x</i>-intercepts",
+            "question": "The behavior of the graph of `y = P(x)` at its `x`-intercepts",
             "answer": "If the corresponding zero has an <b>odd multiplicity</b>, the graph <b>crosses</b> the `x`-axis at that intercept. <br><br> If the corresponding zero has an <b>even multiplicity</b>, the graph touches or <b>\"bounces off\"</b> the `x`-axis at that intercept.",
             "checked": false
         },
@@ -135,6 +133,120 @@
             "question": "The Fundamental Theorem of Algebra (FTA).",
             "answer": "Any polynomial of degree `n >= 1` with complex coefficients has exactly `n` zeros, counting multiplicities.",
             "checked": false
+        },
+        {
+            "id": 23,
+            "question": "Vertical Asymptotes of a Rational Function `R(x) = (P(x))/(Q(x))`",
+            "answer": "Occur where `Q(x) = 0` (assuming the numerator and denominator have no common factors).",
+            "checked": true
+        },
+        {
+            "id": 24,
+            "question": "Horizontal Asymptote of a Rational Function `f(x) = (a_n x^n + ...)/(b_m x^m + ...)`",
+            "answer": "If `n < m`, the horizontal asymptote is `y = 0`. <br><br> If `n = m`, the horizontal asymptote is `y = a_n/b_m`. <br><br> If `n > m`, there is no horizontal asymptote.",
+            "checked": true
+        },
+        {
+            "id": 25,
+            "question": "Slant (Oblique) Asymptote of a Rational Function, `R(x) = (P(x))/(Q(x))`",
+            "answer": "A rational function has a slant asymptote (SA) if the degree of the numerator is <b>exactly one more</b> than the degree of the denominator. <br><br> The equation of the SA is `y = quotient` upon long division of `P(x)` by `Q(x)`.",
+            "checked": true
+        },
+        {
+            "id": 26,
+            "question": "Converting between Degrees and Radians",
+            "answer": "To convert degrees to radians, multiply by `pi / 180^circ`. <br><br> To convert radians to degrees, multiply by `180^circ / pi`.",
+            "checked": true
+        },
+        {
+            "id": 27,
+            "question": "Arc Length of a Circle",
+            "answer": "`s = r theta` <br><br> where `r` is the radius and `theta` is the central angle measured in <b>radians</b>.",
+            "checked": true
+        },
+        {
+            "id": 28,
+            "question": "Right Triangle Trigonometric Ratios (SOH CAH TOA)",
+            "answer": "`sin(theta) = (opp)/(hyp)`,  `csc(theta) = (hyp)/(opp)` <br><br> `cos(theta) = (adj)/(hyp)`,  `sec(theta) = (hyp)/(adj)` <br><br> `tan(theta) = (opp)/(adj)`,  `cot(theta) = (adj)/(opp)`",
+            "checked": true
+        },
+        {
+            "id": 29,
+            "question": "Reference Angle Definition",
+            "answer": "The reference angle `alpha` for any angle `theta` in standard position is the positive acute angle formed by the terminal side of `theta` and the `x`-axis.",
+            "checked": true
+        },
+        {
+            "id": 30,
+            "question": "Wrapping Function",
+            "answer": "The wrapping function maps any real number, `t`, to a point on the unit circle via `W(t)=(cos t, sin t)`. <br><br> It is used to define the trigonometric functions for any real number, `t`.",
+            "checked": true
+        },
+        {
+            "id": 31,
+            "question": "Even and Odd Properties of Trigonometric Functions",
+            "answer": "<b>Even:</b> `cos(-t) = cos(t)` and `sec(-t) = sec(t)` <br><br> <b>Odd:</b> `sin(-t) = -sin(t)`, `csc(-t) = -csc(t)`, `tan(-t) = -tan(t)`, `cot(-t) = -cot(t)`",
+            "checked": true
+        },
+        {
+            "id": 32,
+            "question": "Amplitude and Period of `y = a sin(bx)` and `y = a cos(bx)`",
+            "answer": "<b>Amplitude:</b> `|a|` <br><br> <b>Period:</b> `(2pi) / |b|`",
+            "checked": true
+        },
+        {
+            "id": 33,
+            "question": "Period of Tangent and Cotangent",
+            "answer": "For `y = a tan(bx)` and `y = a cot(bx)`, the <b>Period</b> is `pi / |b|`.",
+            "checked": true
+        },
+        {
+            "id": 34,
+            "question": "How to find the phase shift for any trig function given by `y = a f(bx - c)`",
+            "answer": "Set `bx - c = 0` and solve for `x`. <br><br> The phase shift is `c / b`.",
+            "checked": true
+        },
+        {
+            "id": 35,
+            "question": "Reciprocal Identities",
+            "answer": "`sin x=1/csc x ` <br><br> ` cos x = 1/sec x ` <br><br> `tan x = 1/cot x`",
+            "checked": true
+        },
+        {
+            "id": 36,
+            "question": "Ratio Identities",
+            "answer": "`tan x  = sin x / cos x` <br><br> `cot x = cos x / sin x`",
+            "checked": true
+        },
+        {
+            "id": 37,
+            "question": "Pythagorean Trigonometric Identities",
+            "answer": "`sin^2 x + cos^2 x = 1` <br><br> `1 + tan^2 x = sec^2 x` <br><br> `1 + cot^2 x = csc^2 x`",
+            "checked": true
+        },
+        {
+            "id": 38,
+            "question": "Sum and Difference Identities for Sine",
+            "answer": "`sin(alpha + beta) = sin(alpha)cos(beta) + sin(beta)cos(alpha)` <br><br> `sin(alpha - beta) = sin(alpha)cos(beta) - sin(beta)cos(alpha)`",
+            "checked": true
+        },
+        {
+            "id": 39,
+            "question": "Sum and Difference Identities for Cosine",
+            "answer": "`cos(alpha + beta) = cos(alpha)cos(beta) - sin(alpha)sin(beta)` <br><br> `cos(alpha - beta) = cos(alpha)cos(beta) + sin(alpha)sin(beta)`",
+            "checked": true
+        },
+        {
+            "id": 40,
+            "question": "Sum and Difference Identities for Tangent",
+            "answer": "`tan(alpha + beta) = (tan(alpha) + tan(beta)) / (1 - tan(alpha)tan(beta))` <br><br> `tan(alpha - beta) = (tan(alpha) - tan(beta)) / (1 + tan(alpha)tan(beta))`",
+            "checked": true
+        },
+        {
+            "id": 41,
+            "question": "Cofunction Identities",
+            "answer": "`sin(pi/2 - theta) = cos(theta)` <br><br> `cos(pi/2 - theta) = sin(theta)` <br><br> `tan(pi/2 - theta) = cot(theta)`<br><br> Substitute `pi/2` with `90^circ` to get the cofunction identities in degrees.",
+            "checked": true
         }
     ]
 }
