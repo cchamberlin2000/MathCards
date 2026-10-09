@@ -9,6 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="MathCards">
 
+    <!-- MathJax 2.7.7 Configuration -->
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             asciimath2jax: { delimiters: [['`','`']], preview: "none" },
@@ -21,6 +22,7 @@
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=AM_CHTML"></script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css">
 
@@ -40,6 +42,15 @@
             overscroll-behavior-y: none;
         }
 
+        /* The invisible buffer where MathJax pre-renders the cards */
+        #math-staging {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            width: 350px; /* Simulates a mobile flashcard width for accurate line-breaking */
+            visibility: hidden;
+        }
+
         @keyframes slideUpToFront {
             from { transform: scale(0.95) translateY(15px); opacity: 0.5; }
             to { transform: scale(1) translateY(0); opacity: 1; }
@@ -51,7 +62,7 @@
         .flip-card { perspective: 1000px; }
         .flip-card-inner {
             position: relative; width: 100%; height: 100%;
-            transition: transform 0.6s; transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d;
         }
         .flip-card-inner.flipped { transform: rotateY(180deg); }
         
@@ -65,7 +76,7 @@
             box-sizing: border-box;
             word-break: break-word;
             background: white;
-            overflow-y: auto; /* Added to fix long formulas */
+            overflow-y: auto; 
         }
         .flip-card-back { transform: rotateY(180deg); }
 
@@ -88,7 +99,7 @@
             .nav-zone:hover:not(.disabled) { opacity: 1; } 
         }
         
-        @media (hover: none) { .nav-zone { opacity: 0.1; width: 40px; } }
+        @media (hover: none) { .nav-zone { opacity: 0.2; width: 40px; } }
 
         .nav-zone.left { left: -60px; }
         .nav-zone.right { right: -60px; }
@@ -109,7 +120,6 @@
         }
 
         .nav-zone.disabled { pointer-events: none; visibility: hidden; }
-        .MathJax_Display { display: inline !important; margin: 0 !important; }
 
         .icon-btn {
             width: 44px; height: 44px; display: flex;
@@ -123,6 +133,7 @@
             width: 100%;
             overflow-wrap: break-word;
         }
+        
         .mjx-chtml {
             max-width: 100% !important;
             display: inline-block !important;
@@ -141,6 +152,9 @@
     </style>
 </head>
 <body class="min-h-screen text-slate-100 overflow-x-hidden">
+    <!-- The Pre-Render Buffer -->
+    <div id="math-staging"></div>
+
     <div id="app" class="p-4 md:p-8">
         <div class="max-w-4xl mx-auto">
             <h1 class="text-3xl font-bold text-white mb-6 text-center">Flashcards</h1>
@@ -149,9 +163,6 @@
     </div>
 
     <script>
-        // --- YOUR FILE DIRECTORY ---
-        // Since browsers can't scan folders automatically, list your files here.
-        // Make sure these files are uploaded to the same main directory as this HTML file.
         const JSON_FILES = [
             { title: "Linear Algebra", filename: "LinearAlgebra.json" },
             { title: "Calculus 3", filename: "Calculus3.json" },
@@ -166,9 +177,11 @@
         let activeStudyCards = [];
         let navDirection = 'forward'; 
 
+        // Render is now perfectly clean and instant. No MathJax calls, no opacity hacks.
         function render() {
             const content = document.getElementById('content');
             const title = document.querySelector('h1');
+            
             if (studyMode) { 
                 content.innerHTML = renderStudyMode(); 
                 title.classList.add('hidden'); 
@@ -179,52 +192,84 @@
                 content.innerHTML = renderSetEditor(); 
                 title.classList.remove('hidden'); 
             }
-            setTimeout(() => { if (window.MathJax) MathJax.Hub.Queue(['Typeset', MathJax.Hub, content]); }, 50);
         }
 
         function renderSetsList() {
             let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">';
-            
             JSON_FILES.forEach(item => {
                 html += `<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <h3 class="text-xl font-bold mb-4 text-slate-800">${escapeHtml(item.title)}</h3>
-                    <button onclick="loadSet('${item.filename}', '${escapeHtml(item.title)}')" class="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold">Open Set</button>
+                    <button onclick="loadSet('${item.filename}', '${escapeHtml(item.title)}')" class="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold transition-colors hover:bg-indigo-700">Open Set</button>
                 </div>`;
             });
-            
             html += '</div>';
             return html;
         }
 
         function loadSet(filename, friendlyTitle) {
-            // Attempt to fetch the file from the same directory
-            fetch(filename)
+            // Instantly show a loading UI while MathJax processes the set
+            document.getElementById('content').innerHTML = `
+                <div class="flex flex-col items-center justify-center py-20">
+                    <div class="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-indigo-500 mb-4"></div>
+                    <p class="text-slate-400 font-bold tracking-wider">Preparing Math...</p>
+                </div>`;
+
+            fetch(filename + '?v=' + new Date().getTime(), { cache: "no-store" })
                 .then(response => {
                     if (!response.ok) throw new Error("File not found");
                     return response.json();
                 })
                 .then(data => {
-                    // Extract the cards based on how the JSON is formatted
-                    let loadedCards = [];
-                    if (Array.isArray(data)) {
-                        loadedCards = data;
-                    } else if (data.cards) {
-                        loadedCards = data.cards;
-                        if (data.name) friendlyTitle = data.name;
-                    }
-
-                    // Assign it to our current session
-                    currentSet = {
-                        id: filename,
-                        name: friendlyTitle,
-                        cards: loadedCards
-                    };
+                    let loadedCards = Array.isArray(data) ? data : (data.cards || []);
+                    if (data.name) friendlyTitle = data.name;
                     
-                    render();
+                    currentSet = { id: filename, name: friendlyTitle, cards: loadedCards };
+
+                    // Pre-Render Step 1: Dump all raw AsciiMath into the invisible staging area
+                    const staging = document.getElementById('math-staging');
+                    staging.innerHTML = '';
+                    
+                    currentSet.cards.forEach((card, i) => {
+                        const qDiv = document.createElement('div');
+                        qDiv.id = `staging-q-${i}`;
+                        qDiv.innerHTML = card.question;
+                        
+                        const aDiv = document.createElement('div');
+                        aDiv.id = `staging-a-${i}`;
+                        aDiv.innerHTML = card.answer;
+                        
+                        staging.appendChild(qDiv);
+                        staging.appendChild(aDiv);
+                    });
+
+                    // Pre-Render Step 2: Command MathJax to process the staging area
+                    if (window.MathJax) {
+                        MathJax.Hub.Queue(["Typeset", MathJax.Hub, staging]);
+                        MathJax.Hub.Queue(function() {
+                            // Step 3: MathJax is done. Save the fully formatted HTML directly back to the cards.
+                            currentSet.cards.forEach((card, i) => {
+                                card.renderedQuestion = document.getElementById(`staging-q-${i}`).innerHTML;
+                                card.renderedAnswer = document.getElementById(`staging-a-${i}`).innerHTML;
+                            });
+                            
+                            // Clear staging to free up memory and render the UI
+                            staging.innerHTML = ''; 
+                            render();
+                        });
+                    } else {
+                        // Fallback just in case MathJax fails to load over the network
+                        currentSet.cards.forEach(card => {
+                            card.renderedQuestion = card.question;
+                            card.renderedAnswer = card.answer;
+                        });
+                        render();
+                    }
                 })
                 .catch(error => {
                     console.error(error);
-                    alert(`Could not load ${filename}. Check that the file exists and is uploaded to your GitHub repository.`);
+                    alert(`Could not load ${filename}. Check that the file exists and is uploaded.`);
+                    currentSet = null;
+                    render();
                 });
         }
 
@@ -246,11 +291,12 @@
             
             <div class="space-y-3 pb-20">`;
             currentSet.cards.forEach((card, i) => {
+                // Notice we use card.renderedQuestion and card.renderedAnswer here!
                 html += `<div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex justify-between items-start">
                     <div class="flex-1 pr-4">
                         <div class="text-xs font-bold text-slate-500 uppercase mb-1">Card ${i+1}</div>
-                        <div class="text-slate-100 font-medium">${card.question}</div>
-                        <div class="text-indigo-300 text-sm mt-1">${card.answer}</div>
+                        <div class="text-slate-100 font-medium">${card.renderedQuestion}</div>
+                        <div class="text-indigo-300 text-sm mt-1">${card.renderedAnswer}</div>
                     </div>
                     <div class="flex items-center gap-3">
                         <input type="checkbox" class="card-checkbox" ${card.checked ? 'checked' : ''} onchange="toggleCheck(${i})" style="width:24px; height:24px; accent-color:#4f46e5; cursor:pointer;">
@@ -284,7 +330,7 @@
                             ${currentCardIndex < activeStudyCards.length - 1 ? `
                                 <div class="absolute inset-0 z-0" style="transform: scale(0.95) translateY(15px); opacity: 0.5; pointer-events: none;">
                                     <div class="flip-card-front text-slate-900 shadow-xl" style="position: relative; width: 100%; height: 100%;">
-                                        <div>${activeStudyCards[currentCardIndex + 1].question}</div>
+                                        <div>${activeStudyCards[currentCardIndex + 1].renderedQuestion}</div>
                                     </div>
                                 </div>
                             ` : ''}
@@ -292,15 +338,15 @@
                             <div id="active-card" class="absolute inset-0 z-10 flip-card ${navDirection === 'forward' ? 'animate-to-front' : ''} cursor-pointer" onclick="flipCard()" style="margin: 0; width: 100%; height: 100%;">
                                 <input type="checkbox" class="card-checkbox-overlay" ${isChecked ? 'checked' : ''} onclick="event.stopPropagation(); syncCheck(${masterIndex})">
                                 <div class="flip-card-inner ${isFlipped ? 'flipped' : ''}">
-                                    <div class="flip-card-front text-slate-900 shadow-xl"><div>${card.question}</div></div>
-                                    <div class="flip-card-back text-slate-900 shadow-xl"><div>${card.answer}</div></div>
+                                    <div class="flip-card-front text-slate-900 shadow-xl"><div>${card.renderedQuestion}</div></div>
+                                    <div class="flip-card-back text-slate-900 shadow-xl"><div>${card.renderedAnswer}</div></div>
                                 </div>
                             </div>
                             
                             ${currentCardIndex > 0 ? `
                                 <div id="prev-card" class="absolute inset-0 z-20 pointer-events-none" style="transform: translateX(-150vw) rotate(-15deg);">
                                     <div class="flip-card-front text-slate-900 shadow-2xl" style="position: relative; width: 100%; height: 100%;">
-                                        <div>${activeStudyCards[currentCardIndex - 1].question}</div>
+                                        <div>${activeStudyCards[currentCardIndex - 1].renderedQuestion}</div>
                                     </div>
                                 </div>
                             ` : ''}
@@ -333,7 +379,6 @@
             const inner = document.querySelector('.flip-card-inner');
             if (inner) {
                 inner.classList.toggle('flipped', isFlipped);
-                setTimeout(() => { if (window.MathJax) MathJax.Hub.Queue(['Typeset', MathJax.Hub, inner]); }, 100);
             }
         }
         
@@ -374,40 +419,28 @@
         }
 
         // --- REAL-TIME TOUCH / SWIPE LOGIC ---
-        let touchstartX = 0;
-        let touchstartY = 0;
-        let isDragging = false;
-        let activeCardEl = null;
-        let prevCardEl = null;
-        let swipeDistance = 0; 
+        let touchstartX = 0, touchstartY = 0, isDragging = false, activeCardEl = null, prevCardEl = null, swipeDistance = 0; 
 
         document.addEventListener('touchstart', e => {
             if (!studyMode || !e.target.closest('#active-card')) return;
-            
             touchstartX = e.changedTouches[0].screenX;
             touchstartY = e.changedTouches[0].screenY;
             isDragging = true;
             swipeDistance = 0;
-            
             activeCardEl = document.getElementById('active-card');
             prevCardEl = document.getElementById('prev-card');
-            
             if (activeCardEl) activeCardEl.style.transition = 'none'; 
             if (prevCardEl) prevCardEl.style.transition = 'none'; 
         }, { passive: true });
 
         document.addEventListener('touchmove', e => {
             if (!studyMode) return;
-            if (isDragging) {
-                e.preventDefault();
-            }
-
+            if (isDragging) e.preventDefault();
             if (!isDragging || !activeCardEl) return;
             
-            let currentX = e.changedTouches[0].screenX;
-            let currentY = e.changedTouches[0].screenY;
-            let deltaX = currentX - touchstartX;
-            let deltaY = currentY - touchstartY;
+            let currentX = e.changedTouches[0].screenX, currentY = e.changedTouches[0].screenY;
+            let deltaX = currentX - touchstartX, deltaY = currentY - touchstartY;
+            swipeDistance = Math.max(Math.abs(deltaX), Math.abs(deltaY));
 
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
                 if (deltaX < 0) { 
@@ -437,10 +470,8 @@
             if (!studyMode || !isDragging || !activeCardEl) return;
             isDragging = false;
             
-            let touchendX = e.changedTouches[0].screenX;
-            let touchendY = e.changedTouches[0].screenY;
-            let deltaX = touchendX - touchstartX;
-            let deltaY = touchendY - touchstartY;
+            let touchendX = e.changedTouches[0].screenX, touchendY = e.changedTouches[0].screenY;
+            let deltaX = touchendX - touchstartX, deltaY = touchendY - touchstartY;
             const swipeThreshold = 80;
 
             activeCardEl.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
@@ -452,15 +483,11 @@
                     activeCardEl.style.opacity = '0';
                     setTimeout(() => nextCard(), 300);
                 } else if (deltaX > swipeThreshold && currentCardIndex > 0) {
-                    if (prevCardEl) {
-                        prevCardEl.style.transform = `translateX(0px) rotate(0deg)`;
-                    }
+                    if (prevCardEl) prevCardEl.style.transform = `translateX(0px) rotate(0deg)`;
                     setTimeout(() => prevCard(), 300);
                 } else {
                     activeCardEl.style.transform = `translateX(0px) translateY(0px) rotate(0deg)`;
-                    if (prevCardEl) {
-                        prevCardEl.style.transform = `translateX(-150vw) rotate(-15deg)`;
-                    }
+                    if (prevCardEl) prevCardEl.style.transform = `translateX(-150vw) rotate(-15deg)`;
                 }
             } else {
                 if (deltaY > swipeThreshold) {
@@ -469,9 +496,7 @@
                     setTimeout(() => eliminateCurrentCard(), 300);
                 } else {
                     activeCardEl.style.transform = `translateX(0px) translateY(0px) rotate(0deg)`;
-                    if (prevCardEl) {
-                        prevCardEl.style.transform = `translateX(-150vw) rotate(-15deg)`;
-                    }
+                    if (prevCardEl) prevCardEl.style.transform = `translateX(-150vw) rotate(-15deg)`;
                 }
             }
         }, { passive: true });
@@ -480,26 +505,20 @@
             const activeCard = document.getElementById('active-card');
             const prevCardEl = document.getElementById('prev-card');
             
-            if (direction === 'next') { 
-                if (activeCard && currentCardIndex < activeStudyCards.length - 1) {
-                    activeCard.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
-                    activeCard.style.transform = 'translateX(-150vw) rotate(-15deg)';
-                    activeCard.style.opacity = '0';
-                    setTimeout(() => nextCard(), 300);
-                }
-            } else if (direction === 'prev') { 
-                if (prevCardEl && currentCardIndex > 0) {
-                    prevCardEl.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
-                    prevCardEl.style.transform = 'translateX(0px) rotate(0deg)';
-                    setTimeout(() => prevCard(), 300);
-                }
-            } else if (direction === 'down') {
-                if (activeCard) {
-                    activeCard.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
-                    activeCard.style.transform = 'translateY(150vh) rotate(15deg)';
-                    activeCard.style.opacity = '0';
-                    setTimeout(() => eliminateCurrentCard(), 300);
-                }
+            if (direction === 'next' && activeCard && currentCardIndex < activeStudyCards.length - 1) { 
+                activeCard.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+                activeCard.style.transform = 'translateX(-150vw) rotate(-15deg)';
+                activeCard.style.opacity = '0';
+                setTimeout(() => nextCard(), 300);
+            } else if (direction === 'prev' && prevCardEl && currentCardIndex > 0) { 
+                prevCardEl.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+                prevCardEl.style.transform = 'translateX(0px) rotate(0deg)';
+                setTimeout(() => prevCard(), 300);
+            } else if (direction === 'down' && activeCard) {
+                activeCard.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+                activeCard.style.transform = 'translateY(150vh) rotate(15deg)';
+                activeCard.style.opacity = '0';
+                setTimeout(() => eliminateCurrentCard(), 300);
             }
         }
 
