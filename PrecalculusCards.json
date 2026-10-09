@@ -226,14 +226,14 @@
         },
         {
             "id": 38,
-            "question": "Sum and Difference Identities for Sine",
-            "answer": "`sin(alpha + beta) = sin(alpha)cos(beta) + sin(beta)cos(alpha)` <br><br> `sin(alpha - beta) = sin(alpha)cos(beta) - sin(beta)cos(alpha)`",
+            "question": "Sum Identity for Sine",
+            "answer": "`sin(alpha + beta) =` <br><br> `sin(alpha)cos(beta) + sin(beta)cos(alpha)` ",
             "checked": true
         },
         {
             "id": 39,
-            "question": "Sum and Difference Identities for Cosine",
-            "answer": "`cos(alpha + beta) = cos(alpha)cos(beta) - sin(alpha)sin(beta)` <br><br> `cos(alpha - beta) = cos(alpha)cos(beta) + sin(alpha)sin(beta)`",
+            "question": "Sum Identity for Cosine",
+            "answer": "`cos(alpha + beta) =` <br><br> `cos(alpha)cos(beta) - sin(alpha)sin(beta)`",
             "checked": true
         },
         {
