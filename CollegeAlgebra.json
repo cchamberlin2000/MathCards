@@ -135,6 +135,96 @@
             "question": "The Fundamental Theorem of Algebra (FTA).",
             "answer": "Any polynomial of degree `n >= 1` with complex coefficients has exactly `n` zeros, counting multiplicities.",
             "checked": false
+        },
+        	{
+            "id": 23,
+            "question": "Vertical Asymptotes of a Rational Function `R(x) = (P(x))/(Q(x))`",
+            "answer": "Occur where `Q(x) = 0` (assuming the numerator and denominator have no common factors).",
+            "checked": true
+        },
+        {
+            "id": 24,
+            "question": "Horizontal Asymptote of a Rational Function `f(x) = (a_n x^n + ...)/(b_m x^m + ...)`",
+            "answer": "If `n < m`, the horizontal asymptote is `y = 0`. <br><br> If `n = m`, the horizontal asymptote is `y = a_n/b_m`. <br><br> If `n > m`, there is no horizontal asymptote.",
+            "checked": true
+        },
+        {
+            "id": 25,
+            "question": "Slant (Oblique) Asymptote of a Rational Function, `R(x) = (P(x))/(Q(x))`",
+            "answer": "A rational function has a slant asymptote (SA) if the degree of the numerator is <b>exactly one more</b> than the degree of the denominator. <br><br> The equation of the SA is `y = quotient` upon long division of `P(x)` by `Q(x)`.",
+            "checked": true
+        },
+        {
+            "id": 26,
+            "question": "The Horizontal Line Test",
+            "answer": "A function is one-to-one (1-to-1) if and only if no horizontal line intersects its graph at more than one point. <br><br> <i>(Note: Only one-to-one functions have inverse functions).</i>",
+            "checked": true
+        },
+        {
+            "id": 27,
+            "question": "The definition of an Exponential Function with base <i class='math-font'>a</i>",
+            "answer": "`f(x) = a^x`, where `a > 0`, `a != 1`, and `x` is any real number.",
+            "checked": true
+        },
+        {
+            "id": 28,
+            "question": "The definition of a Logarithmic Function with base <i class='math-font'>a</i>",
+            "answer": "`y = log_a(x)` is equivalent to `a^y = x` <br><br> for `x > 0`, `a > 0`, and `a != 1`.",
+            "checked": true
+        },
+        {
+            "id": 29,
+            "question": "The Inverse Properties of Logarithms",
+            "answer": "`log_a(a^x) = x` <br><br> `a^(log_a(x)) = x`",
+            "checked": true
+        },
+        {
+            "id": 30,
+            "question": "The Product Rule of Logarithms",
+            "answer": "`log_a(MN) = log_a(M) + log_a(N)`",
+            "checked": true
+        },
+        {
+            "id": 31,
+            "question": "The Quotient Rule of Logarithms",
+            "answer": "`log_a(M/N) = log_a(M) - log_a(N)`",
+            "checked": true
+        },
+        {
+            "id": 32,
+            "question": "The Power Rule of Logarithms",
+            "answer": "`log_a(M^c) = c * log_a(M)`",
+            "checked": true
+        },
+        {
+            "id": 33,
+            "question": "The Change-of-Base Formula",
+            "answer": "`log_b(M) = (log_a(M))/(log_a(b))`",
+            "checked": true
+        },
+        {
+            "id": 34,
+            "question": "The One-to-One Property of Exponents and Logarithms for `a > 0` and `a != 1`",
+            "answer": "If `a^M = a^N`, then `M = N`. <br><br> If `log_a(M) = log_a(N)`, then `M = N`.",
+            "checked": true
+        },
+        {
+            "id": 35,
+            "question": "Exponential Growth and Decay Model",
+            "answer": "`N(t) = N_0 e^(kt)` <br><br> where `N_0` is the initial population/amount, `t` is time, and `k` is the continuous rate of growth `(k > 0)` or decay `(k < 0)`.",
+            "checked": true
+        },
+        {
+            "id": 36,
+            "question": "Compound Interest Formula",
+            "answer": "`A = P(1 + r/n)^(nt)` <br><br> where `P` is the principal, `r` is the annual interest rate as a decimal, `n` is the number of compounding periods per year, and `t` is the time in years.",
+            "checked": true
+        },
+        {
+            "id": 37,
+            "question": "Continuous Compounding Formula",
+            "answer": "`A = Pe^(rt)`",
+            "checked": true
         }
     ]
 }
