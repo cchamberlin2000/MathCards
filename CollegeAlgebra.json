@@ -228,7 +228,7 @@
         },
         {
             "id": 38,
-            "question": "How to show two functions, `f and g` are inverses",
+            "question": "How to show two functions, `f and g`, are inverses",
             "answer": "Show that `f(g(x))=x` <br><br> AND <br><br> `g(f(x))=x`",
             "checked": true
         },
