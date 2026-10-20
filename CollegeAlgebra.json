@@ -235,7 +235,7 @@
         {
             "id": 39,
             "question": "Steps for finding the inverse of a given function defined using a formula `y=f(x)`",
-            "answer": "<ol><li>1. Verify that the function `f(x)` is one-to-one (use HLT).</li><li>2. Replace `f(x)` with `y` in the equation.</li><li>Interchange `x` and `y`.</li><li>3. Solve the new equation for `y` in terms of `x`.</li><li>4. Replace `y` with the inverse function notation `f^(-1)(x)`.</li></ol>",
+            "answer": "<ol><li>1. Verify that the function `f(x)` is one-to-one (use HLT).</li><li>2. Replace `f(x)` with `y` in the equation.</li><li>3. Interchange `x` and `y`.</li><li>4. Solve the new equation for `y` in terms of `x`.</li><li>5. Replace `y` with the inverse function notation `f^(-1)(x)`.</li></ol>",
             "checked": true
         }
     ]
