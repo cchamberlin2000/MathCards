@@ -225,6 +225,18 @@
             "question": "Continuous Compounding Formula",
             "answer": "`A = Pe^(rt)`",
             "checked": true
+        },
+        {
+            "id": 38,
+            "question": "How to show two functions, `f and g` are inverses",
+            "answer": "Show that `f(g(x))=x` AND <br><br> `g(f(x))=x`",
+            "checked": true
+        },
+        {
+            "id": 37,
+            "question": "Steps for finding the inverse of a given function defined using a formula `y=f(x)`",
+            "answer": "<ol><li>Verify that the function `f(x)` is one-to-one.</li><li>Replace `f(x)` with `y` in the equation.</li><li>Interchange `x` and `y`.</li><li>Solve the new equation for `y` in terms of `x`.</li><li>Replace `y` with the inverse function notation `f^(-1)(x)`.</li></ol>",
+            "checked": true
         }
     ]
 }
