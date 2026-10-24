@@ -316,7 +316,7 @@
         },
         { 
             "id": 53,
-            "question": "According to the Invertible Matrix Theorem, if an <i class='math-font'>n</i> &times; <i class='math-font'>n</i> matrix <i class='math-font'>A</i> is invertible, what does that imply about its pivots and columns?", 
+            "question": "According to the Invertible Matrix Theorem, if an <i class='math-font'>n</i> &times; <i class='math-font'>n</i> matrix <i class='math-font'>A</i> is invertible, what does that imply about its null space, pivots, and columns?", 
             "answer": "1. `A bb x = bb 0` has only the trivial solution. <br><br> 2. `A` has `n` pivots. <br><br> 3. The columns of `A` are linearly independent. <br><br> 4. Col(`A`) = `RR^n`.", 
             "checked": false 
         },
