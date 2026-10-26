@@ -1,0 +1,126 @@
+{
+    "id": 103,
+    "name": "Singular Value Decomposition (SVD)",
+    "cards": [
+        {
+            "id": 1,
+            "question": "Definition of a <b>Symmetric Matrix</b>",
+            "answer": "A square matrix `S` is symmetric if it is equal to its own transpose:<br><br>`S^T = S`",
+            "checked": false
+        },
+        {
+            "id": 2,
+            "question": "Nature of the eigenvalues of a real symmetric matrix",
+            "answer": "All eigenvalues of a real symmetric matrix are <b>real numbers</b> (no complex eigenvalues).",
+            "checked": false
+        },
+        {
+            "id": 3,
+            "question": "Relationship between eigenvectors of a symmetric matrix corresponding to <b>distinct</b> eigenvalues",
+            "answer": "Eigenvectors corresponding to distinct eigenvalues of a symmetric matrix are <b>orthogonal</b>.<br><br>If `lambda_1 != lambda_2`, then `bb v_1 * bb v_2 = 0`.",
+            "checked": false
+        },
+        {
+            "id": 4,
+            "question": "<strong>The Spectral Theorem for Real Symmetric Matrices</strong>",
+            "answer": "Every real symmetric matrix `S` is <b>orthogonally diagonalizable</b>.<br><br>That is, `S = Q D Q^T`, where `Q` is an orthogonal matrix (`Q^T Q = I`) whose columns are orthonormal eigenvectors of `S`, and `D` is a diagonal matrix of real eigenvalues.",
+            "checked": false
+        },
+        {
+            "id": 5,
+            "question": "Why does the Spectral Theorem apply to `A^T A` and `A A^T` for <i>any</i> `m xx n` matrix `A`?",
+            "answer": "Because both `A^T A` and `A A^T` are guaranteed to be <b>square and symmetric</b>:<br><br>`(A^T A)^T = A^T (A^T)^T = A^T A`",
+            "checked": false
+        },
+        {
+            "id": 6,
+            "question": "Why are the eigenvalues of `A^T A` always <b>nonnegative</b> (`lambda >= 0`)?",
+            "answer": "If `bb v` is a unit eigenvector of `A^T A`, then:<br><br>`||A bb v||^2 = (A bb v)^T (A bb v) = bb v^T A^T A bb v` <br><br> `= bb v^T (lambda bb v) = lambda ||bb v||^2 = lambda`<br><br>Since the squared length `||A bb v||^2 >= 0`, it must be that `lambda >= 0`.",
+            "checked": false
+        },
+        {
+            "id": 7,
+            "question": "If `{bb v_1, bb v_2, ..., bb v_r}` are orthonormal eigenvectors of `A^T A` for nonzero eigenvalues, what is true about `{A bb v_1, A bb v_2, ..., A bb v_r}`?",
+            "answer": "They form an <b>orthogonal set</b> of vectors in `RR^m` with lengths `||A bb v_i|| = sqrt(lambda_i) = sigma_i`.<br><br><i>(Note: This is why dividing `A bb v_i` by `sigma_i` produces an orthonormal basis for the column space of `A`!)</i>",
+            "checked": false
+        },
+        {
+            "id": 8,
+            "question": "<strong>The Singular Value Decomposition (SVD) Formula</strong><br><br>For any `m xx n` matrix `A`:",
+            "answer": "`A = U Sigma V^T`<br><br>where `U` is an `m xx m` orthogonal matrix, `Sigma` is an `m xx n` \"diagonal\" matrix of singular values, and `V` is an `n xx n` orthogonal matrix.",
+            "checked": false
+        },
+        {
+            "id": 9,
+            "question": "Definition of the <b>Singular Values</b> of a matrix `A`",
+            "answer": "`sigma_i = sqrt(lambda_i)`<br><br>where `lambda_1 >= lambda_2 >= ... >= lambda_n >= 0` are the eigenvalues of `A^T A`. Therefore, singular values are always arranged in non-increasing order:<br><br>`sigma_1 >= sigma_2 >= ... >= sigma_r > 0`.",
+            "checked": false
+        },
+        {
+            "id": 10,
+            "question": "What does the number of <b>nonzero</b> singular values of `A` tell you?",
+            "answer": "The number of nonzero singular values `r` equals the <b>rank</b> of the matrix `A`.<br><br>`text(rank)(A) = r`",
+            "checked": false
+        },
+        {
+            "id": 11,
+            "question": "What are the columns of `V` and `U` called in `A = U Sigma V^T`?",
+            "answer": "The columns of `V` (`bb v_1, ..., bb v_n`) are the <b>right singular vectors</b> of `A` (orthonormal eigenvectors of `A^T A`).<br><br>The columns of `U` (`bb u_1, ..., bb u_m`) are the <b>left singular vectors</b> of `A` (orthonormal eigenvectors of `A A^T`).",
+            "checked": false
+        },
+        {
+            "id": 12,
+            "question": "The structure of the `m xx n` matrix `Sigma` in the SVD",
+            "answer": "`Sigma = [ (D, 0), (0, 0) ]`<br><br>where `D = text(diag)(sigma_1, sigma_2, ..., sigma_r)` is an `r xx r` diagonal matrix of the positive singular values, and the remaining entries are padded with zeros to make `Sigma` size `m xx n`.",
+            "checked": false
+        },
+        {
+            "id": 13,
+            "question": "<strong>SVD Step 1:</strong> Finding the singular values of `A`",
+            "answer": "1. Compute the symmetric `n xx n` matrix `A^T A`.<br>2. Find the eigenvalues of `A^T A` by solving `det(A^T A - lambda I) = 0`.<br>3. Order them `lambda_1 >= lambda_2 >= ... >= lambda_n >= 0` and compute `sigma_i = sqrt(lambda_i)`.",
+            "checked": false
+        },
+        {
+            "id": 14,
+            "question": "<strong>SVD Step 2:</strong> Constructing the `m xx n` matrix `Sigma`",
+            "answer": "Place the nonzero singular values `sigma_1 >= sigma_2 >= ... >= sigma_r > 0` along the main diagonal of an `m xx n` zero matrix.",
+            "checked": false
+        },
+        {
+            "id": 15,
+            "question": "<strong>SVD Step 3:</strong> Constructing the `n xx n` orthogonal matrix `V`",
+            "answer": "Find an <b>orthonormal</b> set of eigenvectors `{bb v_1, bb v_2, ..., bb v_n}` of `A^T A` arranged in the exact same order as their corresponding singular values.<br><br>Then set `V = [bb v_1, bb v_2, ..., bb v_n]` (and remember to transpose it to get `V^T`!).",
+            "checked": false
+        },
+        {
+            "id": 16,
+            "question": "What must you do when finding `V` if an eigenvalue of `A^T A` has <b>multiplicity greater than 1</b>?",
+            "answer": "Because eigenvectors in the same eigenspace are not automatically orthogonal, you must apply the <b>Gram-Schmidt Process</b> to the basis of that eigenspace, and then normalize the resulting vectors.",
+            "checked": false
+        },
+        {
+            "id": 17,
+            "question": "<strong>SVD Step 4a:</strong> Finding the first `r` columns of `U` (corresponding to `sigma_i > 0`)",
+            "answer": "Use the formula:<br><br>`bb u_i = 1/(sigma_i) A bb v_i` &nbsp; for `i = 1, 2, ..., r`<br><br><i>(Warning: Do not find `bb u_i` by independently solving for eigenvectors of `A A^T`, or the signs `+-` might not match `V`!)</i>",
+            "checked": false
+        },
+        {
+            "id": 18,
+            "question": "<strong>SVD Step 4b:</strong> Completing the matrix `U` if `r < m`",
+            "answer": "If `r < m`, you need `m - r` additional orthonormal vectors `{bb u_(r+1), ..., bb u_m}`.<br><br>Find a basis for `text(Null)(A^T)` (which is `text(Col)(A)^_|_`), apply Gram-Schmidt and normalize to make them orthonormal, and append them as the remaining columns of `U`.",
+            "checked": false
+        },
+        {
+            "id": 19,
+            "question": "<strong>SVD Step 5:</strong> How to verify your SVD calculation",
+            "answer": "1. Check that `U` and `V` have orthonormal columns (`U^T U = I_m` and `V^T V = I_n`).<br>2. Multiply out `U Sigma V^T` and verify that it equals `A`.",
+            "checked": false
+        },
+        {
+            "id": 20,
+            "question": "<strong>Outer Product Form (Spectral Decomposition) of SVD</strong>",
+            "answer": "`A` = <br><br>`sigma_1 bb u_1 bb v_1^T + sigma_2 bb u_2 bb v_2^T + ... + sigma_r bb u_r bb v_r^T`<br><br>This expresses `A` as a weighted sum of `r` rank-1 matrices.",
+            "checked": false
+        }
+    ]
+}
