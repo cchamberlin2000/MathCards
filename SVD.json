@@ -4,20 +4,20 @@
     "cards": [
         {
             "id": 1,
-            "question": "Definition of a <b>Symmetric Matrix</b>",
-            "answer": "A square matrix `S` is symmetric if it is equal to its own transpose:<br><br>`S^T = S`",
+            "question": "Definition of a <b>Symmetric Matrix, `S`</b>",
+            "answer": "`S = S^T`",
             "checked": false
         },
         {
             "id": 2,
-            "question": "Nature of the eigenvalues of a real symmetric matrix",
-            "answer": "All eigenvalues of a real symmetric matrix are <b>real numbers</b> (no complex eigenvalues).",
+            "question": "All eigenvalues of a real symmetric matrix are what kind of numbers?",
+            "answer": "Real Numbers",
             "checked": false
         },
         {
             "id": 3,
             "question": "Relationship between eigenvectors of a symmetric matrix corresponding to <b>distinct</b> eigenvalues",
-            "answer": "Eigenvectors corresponding to distinct eigenvalues of a symmetric matrix are <b>orthogonal</b>.<br><br>If `lambda_1 != lambda_2`, then `bb v_1 * bb v_2 = 0`.",
+            "answer": "They are orthogonal to each other.",
             "checked": false
         },
         {
