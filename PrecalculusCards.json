@@ -340,7 +340,7 @@
         },
         {
             "id": 57,
-            "question": "How to show two functions, `f` and `g`, are inverses",
+            "question": "How to show two functions `f` and `g` are inverses",
             "answer": "Functions `f` and `g` are inverses of each other if and only if <br><br> `f(g(x)) = x = g(f(x))` for all relevant `x`.",
             "checked": true
         },
