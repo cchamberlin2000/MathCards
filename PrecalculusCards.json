@@ -42,7 +42,7 @@
             "id": 7, 
             "question": "The Pythagorean theorem", 
             "answer": " `a^2 + b^2 = c^2`, where `c` is the hypotenuse of a right triangle and `a` and `b` are the lengths of the other two sides.", 
-            "checked": false 
+            "checked": true 
         },
         { 
             "id": 8, 
@@ -78,7 +78,7 @@
             "id": 13, 
             "question": "<strong>The Quadratic Formula:</strong>  <br><br> The solutions of the quadratic equation `ax^2 + bx + c = 0` are given by", 
             "answer": "`x = (-b +- sqrt(b^2 - 4ac))/(2a)`", 
-            "checked": false 
+            "checked": true 
         },   
         { 
             "id": 14, 
@@ -138,31 +138,31 @@
             "id": 23,
             "question": "Vertical Asymptotes of a Rational Function `R(x) = (P(x))/(Q(x))`",
             "answer": "Occur where `Q(x) = 0` (assuming the numerator and denominator have no common factors).",
-            "checked": true
+            "checked": false
         },
         {
             "id": 24,
             "question": "Horizontal Asymptote of a Rational Function `f(x) = (a_n x^n + ...)/(b_m x^m + ...)`",
             "answer": "If `n < m`, the horizontal asymptote is `y = 0`. <br><br> If `n = m`, the horizontal asymptote is `y = a_n/b_m`. <br><br> If `n > m`, there is no horizontal asymptote.",
-            "checked": true
+            "checked": false
         },
         {
             "id": 25,
             "question": "Slant (Oblique) Asymptote of a Rational Function, `R(x) = (P(x))/(Q(x))`",
             "answer": "A rational function has a slant asymptote (SA) if the degree of the numerator is <b>exactly one more</b> than the degree of the denominator. <br><br> The equation of the SA is `y = quotient` upon long division of `P(x)` by `Q(x)`.",
-            "checked": true
+            "checked": false
         },
         {
             "id": 26,
             "question": "Converting between Degrees and Radians",
             "answer": "To convert degrees to radians, multiply by `pi / 180^circ`. <br><br> To convert radians to degrees, multiply by `180^circ / pi`.",
-            "checked": true
+            "checked": false
         },
         {
             "id": 27,
             "question": "Arc Length of a Circle",
             "answer": "`s = r theta` <br><br> where `r` is the radius and `theta` is the central angle measured in <b>radians</b>.",
-            "checked": true
+            "checked": false
         },
         {
             "id": 28,
@@ -180,13 +180,13 @@
             "id": 30,
             "question": "Wrapping Function",
             "answer": "The wrapping function maps any real number, `t`, to a point on the unit circle via `W(t)=(cos t, sin t)`. <br><br> It is used to define the trigonometric functions for any real number, `t`.",
-            "checked": true
+            "checked": false
         },
         {
             "id": 31,
             "question": "Even and Odd Properties of Trigonometric Functions",
             "answer": "<b>Even:</b> `cos(-t) = cos(t)` and `sec(-t) = sec(t)` <br><br> <b>Odd:</b> `sin(-t) = -sin(t)`, `csc(-t) = -csc(t)`, `tan(-t) = -tan(t)`, `cot(-t) = -cot(t)`",
-            "checked": true
+            "checked": false
         },
         {
             "id": 32,
@@ -204,7 +204,7 @@
             "id": 34,
             "question": "How to find the phase shift for any trig function given by `y = a f(bx - c)`",
             "answer": "Set `bx - c = 0` and solve for `x`. <br><br> The phase shift is `c / b`.",
-            "checked": true
+            "checked": false
         },
         {
             "id": 35,
@@ -228,25 +228,104 @@
             "id": 38,
             "question": "Sum Identity for Sine",
             "answer": "`sin(alpha + beta) =` <br><br> `sin(alpha)cos(beta) + sin(beta)cos(alpha)` ",
-            "checked": true
+            "checked": false
         },
         {
             "id": 39,
             "question": "Sum Identity for Cosine",
             "answer": "`cos(alpha + beta) =` <br><br> `cos(alpha)cos(beta) - sin(alpha)sin(beta)`",
-            "checked": true
+            "checked": false
         },
         {
             "id": 40,
             "question": "Sum and Difference Identities for Tangent",
             "answer": "`tan(alpha + beta) = (tan(alpha) + tan(beta)) / (1 - tan(alpha)tan(beta))` <br><br> `tan(alpha - beta) = (tan(alpha) - tan(beta)) / (1 + tan(alpha)tan(beta))`",
-            "checked": true
+            "checked": false
         },
         {
             "id": 41,
             "question": "Cofunction Identities",
             "answer": "`sin(pi/2 - theta) = cos(theta)` <br><br> `cos(pi/2 - theta) = sin(theta)` <br><br> `tan(pi/2 - theta) = cot(theta)`<br><br> Substitute `pi/2` with `90^circ` to get the cofunction identities in degrees.",
+            "checked": false
+        },
+        {
+            "id": 42,
+            "question": "Double-Angle Identity for Sine",
+            "answer": "`sin(2theta) = 2sin(theta)cos(theta)`",
+            "checked": true
+        },
+        {
+            "id": 43,
+            "question": "Double-Angle Identities for Cosine",
+            "answer": "`cos(2theta) = cos^2(theta) - sin^2(theta)` <br><br> `cos(2theta) = 1 - 2sin^2(theta)` <br><br> `cos(2theta) = 2cos^2(theta) - 1`",
+            "checked": true
+        },
+        {
+            "id": 44,
+            "question": "Double-Angle Identity for Tangent",
+            "answer": "`tan(2theta) = (2tan(theta)) / (1 - tan^2(theta))`",
+            "checked": true
+        },
+        {
+            "id": 45,
+            "question": "Power-Reducing Trigonometric Identities",
+            "answer": "`sin^2(theta) = (1 - cos(2theta)) / 2` <br><br> `cos^2(theta) = (1 + cos(2theta)) / 2` <br><br> `tan^2(theta) = (1 - cos(2theta)) / (1 + cos(2theta))`",
+            "checked": true
+        },
+        {
+            "id": 46,
+            "question": "Half-Angle Identities for Sine and Cosine",
+            "answer": "`sin(alpha/2) = +- sqrt((1 - cos(alpha)) / 2)` <br><br> `cos(alpha/2) = +- sqrt((1 + cos(alpha)) / 2)` <br><br> <i>(The choice of `+` or `-` depends on the quadrant in which `alpha/2` lies.)</i>",
+            "checked": true
+        },
+        {
+            "id": 47,
+            "question": "Half-Angle Identities for Tangent",
+            "answer": "`tan(alpha/2) = (1 - cos(alpha)) / sin(alpha)` <br><br> `tan(alpha/2) = sin(alpha) / (1 + cos(alpha))` <br><br> `tan(alpha/2) = +- sqrt((1 - cos(alpha)) / (1 + cos(alpha)))`",
+            "checked": true
+        },
+        {
+            "id": 48,
+            "question": "Definition, Domain, and Range of `y = sin^(-1)(x)` (or `y = arcsin(x)`)",
+            "answer": "`y = sin^(-1)(x)` if and only if `x = sin(y)` <br><br> <b>Domain:</b> `[-1, 1]` <br><br> <b>Range:</b> `[-pi/2, pi/2]` <br><br> So, `y = sin^(-1)(x)` lies in the first or fourth quadrant.",
+            "checked": true
+        },
+        {
+            "id": 49,
+            "question": "Definition, Domain, and Range of `y = cos^(-1)(x)` (or `y = arccos(x)`)",
+            "answer": "`y = cos^(-1)(x)` if and only if `x = cos(y)` <br><br> <b>Domain:</b> `[-1, 1]` <br><br> <b>Range:</b> `[0, pi]`<br><br> So, `y = cos^(-1)(x)` lies in the first or second quadrant.",
+            "checked": true
+        },
+        {
+            "id": 50,
+            "question": "Definition, Domain, and Range of `y = tan^(-1)(x)` (or `y = arctan(x)`)",
+            "answer": "`y = tan^(-1)(x)` if and only if `x = tan(y)` <br><br> <b>Domain:</b> `(-oo, oo)` <br><br> <b>Range:</b> `(-pi/2, pi/2)` <br><br> So, `y = tan^(-1)(x)` lies in the first or fourth quadrant.",
+            "checked": true
+        },
+        {
+            "id": 51,
+            "question": "The Law of Sines",
+            "answer": "If `A`, `B`, and `C` are the measures of the angles of a triangle, and `a`, `b`, and `c` are the lengths of the sides opposite these angles, then <br><br> `a / sin(A) = b / sin(B) = c / sin(C)`",
+            "checked": true
+        },
+        {
+            "id": 52,
+            "question": "The Law of Cosines",
+            "answer": "`a^2 = b^2 + c^2 - 2bc cos(A)` <br><br> `b^2 = a^2 + c^2 - 2ac cos(B)` <br><br> `c^2 = a^2 + b^2 - 2ab cos(C)`",
+            "checked": true
+        },
+        {
+            "id": 53,
+            "question": "Area of a Triangle (SAS Form)",
+            "answer": "`K = 1/2 bc sin(A)` <br><br> `K = 1/2 ac sin(B)` <br><br> `K = 1/2 ab sin(C)`",
+            "checked": true
+        },
+        {
+            "id": 54,
+            "question": "Heron's Formula for the Area of a Triangle (SSS Form)",
+            "answer": "If `a`, `b`, and `c` are the lengths of the sides of a triangle, then the area of the triangle is <br><br> `sqrt(s(s - a)(s - b)(s - c))` <br><br> where `s = 1/2 (a + b + c)` is the semiperimeter.",
             "checked": true
         }
+
     ]
 }
